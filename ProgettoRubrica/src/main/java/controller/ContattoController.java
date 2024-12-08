@@ -17,7 +17,7 @@
 package controller;
 
 
-import GestioneRubrica.Contatto;
+import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
 import java.awt.Button;
 import java.awt.TextField;
