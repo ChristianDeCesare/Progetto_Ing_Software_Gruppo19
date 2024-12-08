@@ -7,7 +7,7 @@ package controller;
 
 /**
  *
- * @author lorenzocibellis
+ * @author gruppo19
  */
 public class RubricaController {
     
