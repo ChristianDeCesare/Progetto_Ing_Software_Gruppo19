@@ -11,7 +11,7 @@
 
 
 
-package Controller;
+package controller;
 
 import gestioneRubrica.Rubrica;
 import java.awt.Button;
