@@ -12,6 +12,11 @@
 package gestioneRubrica;
 
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /*
@@ -32,7 +37,12 @@ public class Rubrica {
      * Costruttore della classe Rubrica, che sarà inizialmente vuota
      * 
      */
-    public Rubrica(){}
+    public Rubrica(){
+    
+     //creazione lista di contatti
+        this.contactList = FXCollections.observableArrayList();
+    
+    }
     
     
     /**
@@ -57,8 +67,7 @@ public class Rubrica {
     * 
     */
     public boolean aggiungiContatto(Contatto c){
-      //Da completare 
-    }
+        }
     
     /**
      *  @brief Rimuove un contatto da una lista osservabile di contatti.
@@ -80,8 +89,25 @@ public class Rubrica {
      * 
      */
     public boolean rimuoviContatto(ObservableList<Contatto> list){  
+    
+    //rimozione dalla lista i contatti passati come argomento
+        return contactList.removeAll(list);
+        
     }
     
+     /**
+     * @brief Restituzione riferimento della lista di contatti
+     * 
+     * Questo metodo permette l'ottenimento del riferimento alla lista dei contatti per effettuare operazioni
+     * direttamente su di essa.
+     * 
+     * @return Riferimento di contactList. 
+     */
+    public ObservableList<Contatto> getContactList() {
+        
+        return contactList;
+        
+    }
     
     
     /**
@@ -97,11 +123,13 @@ public class Rubrica {
     
     }
     
-    /**
+    
+     /**
+     * 
      * @brief Importa da file esterno una rubrica intera
      * 
-     *Viene richiamato questo metodo nel momento in cui l'utente preme il bottone corrispondente
-     *        Si gestiscono anche i casi in cui il file scelto dall'utente non ha il formato adatto
+     * Viene richiamato questo metodo nel momento in cui l'utente preme il bottone corrispondente
+     * Si gestiscono anche i casi in cui il file scelto dall'utente non ha il formato adatto
      * 
      * @param nomefile Il nome del file da cui importare la rubrica
      * 
@@ -109,10 +137,62 @@ public class Rubrica {
      * 
      * @post La rubrica contenuta nel file avente come nome nomefile viene caricata come rubrica nell'applicazione
      * 
-     * 
+     * @return Riferimento alla rubrica importata
+     * @throws java.io.FileNotFoundException Eccezione per la gestione di file non trovato
      */
-    public void importaRubrica(String nomefile){
+    public Rubrica importaRubrica(String nomefile) throws FileNotFoundException, IOException{
     
+        Rubrica temp = new Rubrica(); //creazione oggetto rubrica
+
+        //Try di apertura file e inizializzazione oggetto di tipo BufferedReader
+        try (BufferedReader br = new BufferedReader(new FileReader(nomefile))) {
+            
+            
+                  String firstLine = br.readLine(); 
+
+        // Controllo se la prima parola è "RUBRICA"
+        if (firstLine == null || !firstLine.trim().equalsIgnoreCase("RUBRICA")) 
+           return temp; // Ritorna una rubrica vuota in caso di errore
+        
+        
+            
+            String line;
+            
+            //legge la prima riga di intestazione
+            br.readLine(); 
+
+            //ciclo di lettura linee
+            while ((line = br.readLine()) != null) { 
+
+                //creazione contatto temporaneo
+                Contatto c = new Contatto();
+                
+                String[] fields = line.split(";", -1); // Usa -1 per mantenere i campi vuoti
+
+                //settaggio dati contatto
+                c.setCognome(fields[0]);
+                c.setNome(fields[1]);
+                c.setNumero1(fields[2].isEmpty() ? "" : fields[2]);
+                c.setNumero2(fields[3].isEmpty() ? "" : fields[3]);
+                c.setNumero3(fields[4].isEmpty() ? "" : fields[4]);
+                c.setEmail1(fields[5].isEmpty() ? "" : fields[5]);
+                c.setEmail2(fields[6].isEmpty() ? "" : fields[6]);
+                c.setEmail3(fields[7].isEmpty() ? "" : fields[7]);
+
+                //aggiunta contatto alla rubrica importata
+                temp.aggiungiContatto(c); 
+
+
+            }
+        } catch (IOException e) /*Cattura eccezione*/{
+
+            System.err.println("Errore durante la lettura del file");
+            Avviso.errore("Errore", "Errore importazione", "Errore durante la lettura del file");
+            
+        }
+
+        return temp;
+
     }
     
     /**

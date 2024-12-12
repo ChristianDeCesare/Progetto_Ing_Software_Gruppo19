@@ -1,5 +1,5 @@
 /**
- * @file MainRubrica
+ * @file App.java
  * 
  * @brief Classe principale per l'applicazione in JavaFX.
  *
@@ -15,7 +15,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mainPackage;
+package com.mycompany.progettorubrica;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -25,7 +25,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class MainRubrica extends Application {
+public class App extends Application {
 
     /**
      * @brief Metodo principale di avvio dell'applicazione JavaFX.
@@ -39,7 +39,7 @@ public class MainRubrica extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("file.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Rubrica.fxml"));
         
         // Creazione della scena con il layout caricato
         Scene scene = new Scene(root);

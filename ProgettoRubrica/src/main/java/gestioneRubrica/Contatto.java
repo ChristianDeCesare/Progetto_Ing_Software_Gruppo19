@@ -53,8 +53,19 @@ public class Contatto implements Comparable<Contatto> {
     
     public Contatto() {
        
+        this.nome = "";
+        this.cognome = "";
         numeri = new String[3];
         emails = new String[3];
+    
+        numeri[0] = "";
+        numeri[1] = "";
+        numeri[2] = "";
+    
+    
+        emails[0] = "";
+        emails[1] = "";
+        emails[2] = "";
     }
 
     /**
