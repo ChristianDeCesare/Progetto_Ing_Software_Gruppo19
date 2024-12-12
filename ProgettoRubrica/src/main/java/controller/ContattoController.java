@@ -152,7 +152,14 @@ public class ContattoController extends Controller implements Initializable {
      *        
      */
     public void disableModify() {
-        // Da implementare
+        this.nameField.setEditable(false);
+        this.surnameField.setEditable(false);
+        this.number1Field.setEditable(false);
+        this.number2Field.setEditable(false);
+        this.number3Field.setEditable(false);
+        this.email1Field.setEditable(false);
+        this.email2Field.setEditable(false);
+        this.email3Field.setEditable(false);
     }
 
     /**
