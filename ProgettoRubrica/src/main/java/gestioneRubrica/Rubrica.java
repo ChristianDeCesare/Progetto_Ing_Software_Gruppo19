@@ -13,9 +13,12 @@ package gestioneRubrica;
 
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -210,7 +213,50 @@ public class Rubrica {
      * 
      */
     public void esportaRubrica(String nomefile){
-    
+        try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(nomefile)))) {   
+            
+            pw.println("COGNOME;NOME;NUMERO 1;NUMERO 2;NUMERO 3;EMAIL 1;EMAIL 2; EMAIL3");   
+            
+            
+            for(Contatto c : contactList){
+                
+               
+                pw.print(c.getCognome());
+                pw.append(';');
+                
+                
+                pw.print(c.getNome());
+                pw.append(';');          
+                
+                
+                String[] numeri = c.getNumeri();
+                
+                pw.print(numeri[0]);
+                pw.append(';'); 
+                pw.print(numeri[1]);
+                pw.append(';'); 
+                pw.print(numeri[2]);
+                pw.append(';'); 
+                
+                String[] emails = c.getEmails();
+                
+                pw.print(emails[0]);
+                pw.append(';'); 
+                pw.print(emails[1]);
+                pw.append(';'); 
+                
+                pw.println(emails[2]);
+                
+                
+            
+            }
+            
+            
+        }catch (IOException e) {
+        
+        System.err.println("Errore durante la scrittura del file: ");
+        
+    }
     }
     
 }
