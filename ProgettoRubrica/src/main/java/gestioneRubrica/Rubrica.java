@@ -19,6 +19,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -51,26 +52,40 @@ public class Rubrica {
     /**
     *  @brief Aggiunge un contatto alla lista dei contatti.
     *
-    *Questo metodo consente di aggiungere un oggetto di tipo {@link Contatto.java} a una 
-    *         collezione o struttura dati (ad esempio, una lista). Se il contatto 
-    *         è già presente o se ci sono condizioni particolari per l'aggiunta (come 
-    *         valori null o duplicati), il metodo può gestirle restituendo un valore booleano.
+    * Questo metodo consente di aggiungere un oggetto di tipo {@link Contatto.java} a una 
+    * collezione o struttura dati (ad esempio, una lista). Se il contatto 
+    * è già presente o se ci sono condizioni particolari per l'aggiunta (come 
+    * valori null o duplicati), il metodo può gestirle restituendo un valore booleano.
     *
     * @param c il contatto da aggiungere, rappresentato come un oggetto {@link Contatto.java}.
-    * 
-    * @return {@code true} se il contatto è stato aggiunto con successo;
-    *         {@code false} altrimenti (ad esempio, se il contatto è già presente 
-    *         o se l'aggiunta non è consentita per altri motivi).
     * 
     * @pre c non può essere null.
     * 
     * @post Il contatto è aggiunto alla rubrica.
     * 
+    * @return un valore intero in base alla riuscita o meno dell'operazione:
+    *         0 se l'operazione ha avuto successo;
+    *         1 se i nominativi già esistevano in rubrica
+    *         2 se il contatto non è stato aggiunto in rubrica per altro problema
     * 
-    * 
+    * @throws NullPointerException Eccezione per gestire il caso in cui c sia null
     */
-    public boolean aggiungiContatto(Contatto c){
-        }
+    public int aggiungiContatto(Contatto c){
+        
+      if(c == null)// controllo puntatore null
+          throw new NullPointerException("Puntatore contatto = null"); //Lancio eccezione
+      
+        if(contactList.contains(c)) //controllo contatto già presente
+            return 1;
+
+
+        if(this.contactList.add(c)){//aggiunta e controllo aggiunta alla rubrica
+        //sorting della lista
+        Collections.sort(contactList);
+        return 0;
+     }
+     return 2;
+    }
     
     /**
      *  @brief Rimuove un contatto da una lista osservabile di contatti.
