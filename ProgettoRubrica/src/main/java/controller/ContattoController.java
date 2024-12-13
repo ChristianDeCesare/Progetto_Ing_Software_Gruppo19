@@ -145,21 +145,27 @@ public class ContattoController extends Controller implements Initializable {
     }
 
     /**
-     * @brief Disabilita l'interazione con i campi di testo
+     * @brief Gestisce l'interazione con i campi di testo
      *
-     * Il metodo disabilita l'interazione con i campi di testo in modo che essi siano 
-     * accedibili dall'utente in modalità di sola lettura
+     * Il metodo gestisce l'interazione con i campi di testo in modo che si renda
+     * possibile/impossibile la loro modifica
+     * 
+     * @param disable Permette di definire l'abilitazione o la disabilitazione dei campi:
+     *                -true: disabilita
+     *                -false: abilita
      *        
      */
-    public void disableModify() {
-        this.nameField.setEditable(false);
-        this.surnameField.setEditable(false);
-        this.number1Field.setEditable(false);
-        this.number2Field.setEditable(false);
-        this.number3Field.setEditable(false);
-        this.email1Field.setEditable(false);
-        this.email2Field.setEditable(false);
-        this.email3Field.setEditable(false);
+    public void disableModify(boolean disable) {
+       
+        this.nameField.setEditable(!disable);
+        this.surnameField.setEditable(!disable);
+        this.number1Field.setEditable(!disable);
+        this.number2Field.setEditable(!disable);
+        this.number3Field.setEditable(!disable);
+        this.email1Field.setEditable(!disable);
+        this.email2Field.setEditable(!disable);
+        this.email3Field.setEditable(!disable);
+
     }
 
     /**
@@ -184,7 +190,16 @@ public class ContattoController extends Controller implements Initializable {
      * @param c l'evento che ha generato l'azione di modifica.
      */
     private void modify(ActionEvent c) {
-        // Da implementare
+        
+        //si rende invisibile il bottone di modifica
+        modifyButton.setVisible(false);
+        
+        //si rende visibile il bottone di conferma
+        confirmButton.setVisible(true);
+        
+        //viene invocato il metodo disable modify con attributo "false"
+        disableModify(false);
+        
     }
 
     /**
