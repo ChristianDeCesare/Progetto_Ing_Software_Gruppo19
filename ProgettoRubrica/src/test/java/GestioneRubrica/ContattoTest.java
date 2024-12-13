@@ -72,115 +72,57 @@ public class ContattoTest {
         assertEquals("1122334455", numeri[2], "Il terzo numero non è stato impostato correttamente.");
     }
 
+    @Test
+    void testSetAndGetEmails() {
+        // Testiamo gli indirizzi email
+        contatto.setEmail1("marco.rossi@example.com");
+        contatto.setEmail2("m.rossi@example.com");
+        contatto.setEmail3("rossi.m@example.com");
+
+        String[] emails = contatto.getEmails();
+        assertEquals("marco.rossi@example.com", emails[0], "Il primo email non è stato impostato correttamente.");
+        assertEquals("m.rossi@example.com", emails[1], "Il secondo email non è stato impostato correttamente.");
+        assertEquals("rossi.m@example.com", emails[2], "Il terzo email non è stato impostato correttamente.");
+    }
     
-    /**
-     * Test of setEmail1 method, of class Contatto.
-     */
     @Test
-    public void testSetEmail1() {
-        System.out.println("setEmail1");
-        String email = "";
-        Contatto instance = new Contatto();
-        instance.setEmail1(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testCompareToEqual() {
+        // Testiamo se due contatti con gli stessi nome e cognome sono uguali
+        Contatto contatto2 = new Contatto();
+        contatto2.setNome("Marco");
+        contatto2.setCognome("Rossi");
+
+        contatto.setNome("Marco");
+        contatto.setCognome("Rossi");
+
+        assertEquals(0, contatto.compareTo(contatto2), "I contatti dovrebbero essere uguali.");
     }
 
-    /**
-     * Test of setEmail2 method, of class Contatto.
-     */
     @Test
-    public void testSetEmail2() {
-        System.out.println("setEmail2");
-        String email = "";
-        Contatto instance = new Contatto();
-        instance.setEmail2(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testCompareToDifferentCognome() {
+        // Testiamo se il confronto tiene conto del cognome
+        Contatto contatto2 = new Contatto();
+        contatto2.setNome("Marco");
+        contatto2.setCognome("Bianchi");
+
+        contatto.setNome("Marco");
+        contatto.setCognome("Rossi");
+
+        assertTrue(contatto.compareTo(contatto2) > 0, "Il cognome Rossi dovrebbe essere maggiore di Bianchi.");
     }
 
-    /**
-     * Test of setEmail3 method, of class Contatto.
-     */
     @Test
-    public void testSetEmail3() {
-        System.out.println("setEmail3");
-        String email = "";
-        Contatto instance = new Contatto();
-        instance.setEmail3(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    void testCompareToDifferentNome() {
+        // Testiamo se il confronto tiene conto del nome
+        Contatto contatto2 = new Contatto();
+        contatto2.setNome("Alessandro");
+        contatto2.setCognome("Rossi");
 
-    /**
-     * Test of getNome method, of class Contatto.
-     */
-    @Test
-    public void testGetNome() {
-        System.out.println("getNome");
-        Contatto instance = new Contatto();
-        String expResult = "";
-        String result = instance.getNome();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+        contatto.setNome("Mario");
+        contatto.setCognome("Rossi");
 
-    /**
-     * Test of getCognome method, of class Contatto.
-     */
-    @Test
-    public void testGetCognome() {
-        System.out.println("getCognome");
-        Contatto instance = new Contatto();
-        String expResult = "";
-        String result = instance.getCognome();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNumeri method, of class Contatto.
-     */
-    @Test
-    public void testGetNumeri() {
-        System.out.println("getNumeri");
-        Contatto instance = new Contatto();
-        String[] expResult = null;
-        String[] result = instance.getNumeri();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getEmails method, of class Contatto.
-     */
-    @Test
-    public void testGetEmails() {
-        System.out.println("getEmails");
-        Contatto instance = new Contatto();
-        String[] expResult = null;
-        String[] result = instance.getEmails();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of compareTo method, of class Contatto.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        Contatto c = null;
-        Contatto instance = new Contatto();
-        int expResult = 0;
-        int result = instance.compareTo(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(0< contatto.compareTo(contatto2), "Il nome Marco dovrebbe essere minore di Alessandro.");
+        //System.out.println("Nomi uguali");
     }
     
 }
