@@ -31,7 +31,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 
 
-public class ContattoController extends Controller implements Initializable {
+public class ContattoController implements Initializable {
 
     // Attributi
    /**

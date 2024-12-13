@@ -24,7 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 
-public class RubricaController extends Controller implements Initializable {
+public class RubricaController implements Initializable {
 
     /**
      *  Puntatore all'istanza di Rubrica gestita.

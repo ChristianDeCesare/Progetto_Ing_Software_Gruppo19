@@ -139,6 +139,15 @@ public class Rubrica {
      */
     public Rubrica ricercaContatti(String s){
     
+          //creazione rubrica temporanea
+        Rubrica temp = new Rubrica();
+        for(Contatto c : contactList){ //ciclo di controllo su tutti i contatti della lista
+            if(c.getNome().toLowerCase().startsWith(s) || c.getCognome().toLowerCase().startsWith(s)) //controllo presenza sottostringa
+                temp.aggiungiContatto(c); //aggiunta contatto avente la sottostringa nel nominativo alla rubrica temporanea
+        }
+        //restituzione riferimento alla rubrica temporanea
+        return temp;
+        
     }
     
     

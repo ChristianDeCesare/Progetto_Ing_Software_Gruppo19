@@ -176,16 +176,8 @@ public class Contatto implements Comparable<Contatto> {
         return emails;
     }
 
-    /**
-     * @brief Modifica i dettagli del contatto.
-     * 
-     * Questo metodo permette di aggiornare le informazioni esistenti di un contatto.
-     */
-    public void modificaContatto() {
-        // Da implementare: definire come aggiornare i dettagli del contatto.
-    }
-
-    
+   
+   
     /**
      * @brief Confronta questo contatto con un altro contatto basandosi sul cognome e sul nome.
      *
