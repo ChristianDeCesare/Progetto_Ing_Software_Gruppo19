@@ -1,0 +1,27 @@
+#contactPane {
+    -fx-background-color: #ffffff;  /*Colore di sfondo*/
+}
+
+.tool-bar {
+    -fx-background-color: white; /* Colore di sfondo della toolbar */
+}
+
+.button {
+    -fx-background-color: #8b0000; /* Sfondo bottoni*/
+    -fx-text-fill: white; /*testo bottoni*/
+}
+
+#nameField, 
+#surnameField, 
+#number1Field, 
+#number2Field, 
+#number3Field, 
+#email1Field, 
+#email2Field, 
+#email3Field {
+    -fx-background-color: white; /*colore dei campi*/
+    -fx-border-color: transparent transparent #4b4b4b transparent; /*Solo il bordo di sotto grigio scuro*/
+    -fx-border-width: 0 0 0.5px 0; /* Spessore: 0 sopra, 0 destra, 0.5px sotto, 0 sinistra */
+    -fx-prompt-text-fill: #4b4b4b; /*colore del testo "nome" "cognome"*/
+    -fx-text-fill: #4b4b4b; /*colore del testo inserito dall'utente*/
+}
