@@ -27,75 +27,106 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 
 
 public class ContattoController extends Controller implements Initializable {
 
     // Attributi
-    /**
-     * Riferimento al contatto gestito dal controller.
+   /**
+     * Pannello di base sul quale è costruito il Controller.
      */
-    private Contatto contactPointer;
-
+    @FXML
+    private StackPane contactPane;
+    
     /**
      * Campo di testo per il nome del contatto.
      */
-    private TextField nameField;
+    @FXML
+    private javafx.scene.control.TextField nameField;
 
     /**
      * Campo di testo per il cognome del contatto.
      */
-    private TextField surnameField;
+    @FXML
+    private javafx.scene.control.TextField surnameField;
 
     /**
      * Campo di testo per il primo numero di telefono del contatto.
      */
-    private TextField number1Field;
+    @FXML
+    private javafx.scene.control.TextField number1Field;
 
     /**
      * Campo di testo per il secondo numero di telefono del contatto.
      */
-    private TextField number2Field;
+    @FXML
+    private javafx.scene.control.TextField number2Field;
 
     /**
      * Campo di testo per il terzo numero di telefono del contatto.
      */
-    private TextField number3Field;
+    @FXML
+    private javafx.scene.control.TextField number3Field;
 
     /**
      * Campo di testo per il primo indirizzo email del contatto.
      */
-    private TextField email1Field;
+    @FXML
+    private javafx.scene.control.TextField email1Field;
 
     /**
      * Campo di testo per il secondo indirizzo email del contatto.
      */
-    private TextField email2Field;
+    @FXML
+    private javafx.scene.control.TextField email2Field;
 
     /**
      * Campo di testo per il terzo indirizzo email del contatto.
      */
-    private TextField email3Field;
+    @FXML
+    private javafx.scene.control.TextField email3Field;
 
     /**
      * Bottone per abilitare la modifica del contatto.
      */
-    private Button modifyButton;
+    @FXML
+    private javafx.scene.control.Button modifyButton;
 
     /**
-     * Bottone per confermare le modifiche al contatto.
+     * Bottone per confermare l'operazione di aggiunta o modifica del contatto.
      */
-    private Button confirmButton;
-
-    /**
-     * Bottone per eliminare il contatto.
-     */
-    private Button removeButton;
+    @FXML
+    private javafx.scene.control.Button confirmButton;
 
     /**
      * Bottone per uscire dalla vista corrente.
      */
-    private Button exitButton;
+    @FXML
+    private javafx.scene.control.Button exitButton;
+
+    /**
+     * Puntatore alla rubrica a cui appartiene il contatto.
+     */
+    private Rubrica rubricaPointer;
+    
+    /**
+     * Puntatore al contatto su cui il controller lavora.
+     */
+    private Contatto contactPointer;
+    
+    /**
+     * Tipo del controller: 
+     * -false se il controller gestisce l'aggiunta del contatto alla rubrica;
+     * -true se il controller gestisce la visualizzazione e modifica del contatto.
+     */
+    private boolean typeController;
+    
+    /**
+     * puntatore alla tabella in cui il contatto è mostrato.
+     */
+    private TableView<Contatto> tablePointer;
 
     /**
     * @brief Inizializza il controller al caricamento della scena.
@@ -129,19 +160,62 @@ public class ContattoController extends Controller implements Initializable {
         // Da implementare
     }
 
-    /**
-     * @brief Imposta il controller associando un contatto specifico.
+     /**
+     * @brief Configura il controller con i riferimenti ai dati e alla GUI.
      *
      * @param c il contatto da associare al controller.
+     * @param r la rubrica a cui il controller farà riferimento.
+     * @param table la tabella di visualizzazione dei contatti.
+     *
+     * Questo metodo esegue le seguenti operazioni:
+     * - Salva i riferimenti alla rubrica, alla tabella e al contatto.
+     * - Popola i campi della GUI con i dati del contatto specificato.
+     * - Nasconde i pulsanti di conferma e uscita.
+     * - Disabilita la possibilità di modificare i dati iniziali tramite `disableModify(true)`.
      * 
-     * @param r il riferimento alla rubrica a cui il contatto appartiene.
-     * 
-     * @pre c ed r non devono essere null.
+     * @pre c, table ed r non devono essere null.
      * 
      * @post il controller conterrà le informazioni di c.
      */
-    public void setController(Contatto c, Rubrica r) {
-        // Da implementare
+    public void setController(Contatto c, Rubrica r, TableView<Contatto> table) {
+        
+        //salvataggio puntatore rubrica
+        rubricaPointer=r;
+        
+        //definizione tipo di controller
+        typeController = true;
+        
+        //salvataggio puntatore alla tabella di visualizzazione del contatto
+        this.tablePointer = table;
+        
+        
+        // Memorizza il contatto passato al controller
+        this.contactPointer = c;
+
+        // Popola i campi della GUI con i dati del contatto
+        nameField.setText(c.getNome());
+        surnameField.setText(c.getCognome());
+        String[] numeri = c.getNumeri();
+        number1Field.setText(numeri[0]);
+        number2Field.setText(numeri[1]);
+        number3Field.setText(numeri[2]);
+        String[] emails = c.getEmails();
+        email1Field.setText(emails[0]);
+        email2Field.setText(emails[1]);
+        email3Field.setText(emails[2]);
+        
+        //reso il bottone di conferma invisibile
+        confirmButton.setVisible(false);
+        
+        //reso il bottone di uscita invisibile e inutilizzabile
+        exitButton.setVisible(false);
+        exitButton.setDisable(false);
+        
+        //invocato metodo disableModify con attributo "true"
+        disableModify(true);
+        
+        
+        
     }
 
     /**
