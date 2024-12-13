@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
@@ -170,8 +171,8 @@ public class ContattoController implements Initializable {
     /**
      * @brief Imposta il controller con i riferimenti e inizializza i componenti.
      *
-     *        Questo metodo permette di configurare il controller e i suoi componenti
-     *        per il funzionamento corretto dell'interfaccia utente.
+     * Questo metodo permette di configurare il controller e i suoi componenti
+     * per il funzionamento corretto dell'interfaccia utente.
      * 
      *  @param r il riferimento alla rubrica.
      * 
@@ -180,7 +181,20 @@ public class ContattoController implements Initializable {
      * @post Il controller conterrà il riferimento alla rubrica su cui lavorare.
      */
     public void setController(Rubrica r) {
-        // Da implementare
+       
+        //salvataggio puntatore alla rubrica
+    this.rubricaPointer = r;
+    
+    //definizione tipo di controller
+    typeController = false;
+    
+    //reso il bottone di modifica invisibile
+    modifyButton.setVisible(false);
+    
+    Platform.runLater(() -> { 
+        nameField.requestFocus();   //Cambia il focus all'apertura della schermata
+        nameField.positionCaret(0); //posizione il cursore all'inizio del textField
+        });
     }
 
      /**
@@ -278,14 +292,14 @@ public class ContattoController implements Initializable {
     }
 
     /**
-     * @brief Abilita la modifica dei dati del contatto.
+     * @brief Abilita modifiche al contatto
      *
-     *        Questo metodo viene invocato quando l'utente preme il bottone di modifica.
-     *        I campi di input diventano modificabili per permettere all'utente di,eventualmente,
-     *        modificare i dati.
+     * Questo metodo viene invocato quando l'utente preme il bottone di modifica durante la visualizzazione del contatto.
+     * I campi di testo venogno abilitati alla modifica.
      *
-     * @param c l'evento che ha generato l'azione di modifica.
+     * @param c L'evento che ha generato l'azione di conferma.
      */
+    @FXML
     private void modify(ActionEvent c) {
         
         //si rende invisibile il bottone di modifica
@@ -296,6 +310,12 @@ public class ContattoController implements Initializable {
         
         //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
+        
+          Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
+        nameField.requestFocus();
+        nameField.positionCaret(nameField.getText().length()); //posizione il cursore alla fine del testo del textField
+        });
+        
         
     }
 
