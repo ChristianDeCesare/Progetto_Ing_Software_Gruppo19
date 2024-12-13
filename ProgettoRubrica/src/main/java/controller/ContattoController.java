@@ -127,7 +127,30 @@ public class ContattoController implements Initializable {
      * puntatore alla tabella in cui il contatto è mostrato.
      */
     private TableView<Contatto> tablePointer;
+    
+    public StackPane getContactPane() {
+        return contactPane;
+    }
 
+    public javafx.scene.control.Button getConfirmButton() {
+        return confirmButton;
+    }
+
+    public Rubrica getRubricaPointer() {
+        return rubricaPointer;
+    }
+
+    public Contatto getContactPointer() {
+        return contactPointer;
+    }
+
+    public boolean isTypeController() {
+        return typeController;
+    }
+
+    public TableView<Contatto> getTablePointer() {
+        return tablePointer;
+    }
     /**
     * @brief Inizializza il controller al caricamento della scena.
     * 
