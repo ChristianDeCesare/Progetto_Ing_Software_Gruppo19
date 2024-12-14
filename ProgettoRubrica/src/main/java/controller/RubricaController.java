@@ -217,8 +217,10 @@ public class RubricaController implements Initializable {
         stage.show(); //visualizzazione pop-up di aggiunta
         
     }
+    
+    
     /**
-     * @brief Ricerca contatti
+     * @brief Ricerca dei contatti all'interno della rubrica
      * 
      * Questo metodo permette la ricerca dei contatti tramite una stringa di testo
      * 
@@ -240,7 +242,7 @@ public class RubricaController implements Initializable {
     /**
      * @brief Metodo reset ricerca
      * 
-     * Questo Metodo permette il reset della ricerca, mostrando nuovamente la rubrica "originale" 
+     * Questo metodo permette il reset della ricerca, mostrando nuovamente la rubrica "originale" 
      * e svuotando la barra ricerca
      * 
      * @param event L'evento che ha generato l'operazione di reset 
@@ -260,6 +262,18 @@ public class RubricaController implements Initializable {
         });
     }
 
+    
+      
+    /**
+     * @brief Metodo delete contatto/i
+     * 
+     * Questo metodo permette la rimozione di uno o più contatti dalla rubrica.
+     * Nel momento in cui viene premuto il tasto delete, avendo selezionato 
+     * uno o più contatti dalla rubrica, viene mostrato a video un messaggio di conferma eliminazione,
+     * l'utente può scegliere se confermare o annullare l'operazione.
+     * 
+     * @param event L'evento che ha generato l'operazione di eliminazione 
+     */
     @FXML
     private void delete(javafx.event.ActionEvent event) {
     
@@ -285,6 +299,8 @@ public class RubricaController implements Initializable {
      * @brief Apre i dettagli di un contatto selezionato.
      * 
      * @param event evento che attiva l'apertura del contatto
+     * 
+     * @throws IOException
      */
     private void openContact(javafx.event.ActionEvent event) throws IOException {
     
@@ -310,9 +326,11 @@ public class RubricaController implements Initializable {
     }
 
     /**
-     * @brief Esporta i contatti della Rubrica in un file.
+     * @brief Esporta tutti i contatti della Rubrica all'interno di un file.
      * 
      * @param event evento che attiva l'esportazione
+     * 
+     * @throws IOException
      */
     @FXML
     private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
@@ -351,6 +369,8 @@ public class RubricaController implements Initializable {
      * @brief Importa contatti nella Rubrica da un file.
      * 
      * @param event evento che attiva l'importazione
+     * 
+     * @throws IOException
      */
     @FXML
     private void importRubrica(javafx.event.ActionEvent event) throws IOException {
