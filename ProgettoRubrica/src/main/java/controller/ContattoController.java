@@ -17,6 +17,7 @@
 package controller;
 
 
+import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
 import java.awt.Button;
@@ -188,7 +189,7 @@ public class ContattoController implements Initializable {
             if (event.getCode() == javafx.scene.input.KeyCode.ENTER) //gestione evento tasto ENTER
                 confirmButton.fire(); // Simula un click sul bottone confirm
 
-            else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)  //gestione evento tasto ESCAPE
+            else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE && exitButton.isVisible())  //gestione evento tasto ESCAPE
                 exitButton.fire(); // Simula un click sul bottone exit
             });
     
@@ -273,7 +274,6 @@ public class ContattoController implements Initializable {
         
         //reso il bottone di uscita invisibile e inutilizzabile
         exitButton.setVisible(false);
-        exitButton.setDisable(false);
         
         //invocato metodo disableModify con attributo "true"
         disableModify(true);
@@ -303,6 +303,8 @@ public class ContattoController implements Initializable {
         this.email1Field.setEditable(!disable);
         this.email2Field.setEditable(!disable);
         this.email3Field.setEditable(!disable);
+        this.modifyButton.setVisible(disable);
+        this.confirmButton.setVisible(!disable);
 
     }
 
@@ -373,12 +375,6 @@ public class ContattoController implements Initializable {
      */
     @FXML
     private void modify(ActionEvent c) {
-        
-        //si rende invisibile il bottone di modifica
-        modifyButton.setVisible(false);
-        
-        //si rende visibile il bottone di conferma
-        confirmButton.setVisible(true);
         
         //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
