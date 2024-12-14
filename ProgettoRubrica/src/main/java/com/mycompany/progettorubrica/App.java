@@ -17,6 +17,7 @@
  */
 package com.mycompany.progettorubrica;
 
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -28,37 +29,70 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     /**
-     * @brief Metodo principale di avvio dell'applicazione JavaFX.
-     *
-     *Questo metodo viene invocato automaticamente dal framework JavaFX 
-     *        e si occupa di configurare e mostrare la finestra principale dell'applicazione.
+     * @brief Metodo standard per l'avvio del programma
      * 
-     * @param stage La finestra principale dell'applicazione (Stage).
+     * Questo metodo  permette l'inizializzazione dell'interfaccia grafica di JavaFX
      * 
-     * @throws Exception Se si verifica un errore durante il caricamento del file FXML.
+     * @param stage La finestra sulla quale mostrare l'interfaccia grafica
+     * 
+     * @throws IOException Eccezione del metodo loadFXML
      */
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Rubrica.fxml"));
-        
-        // Creazione della scena con il layout caricato
-        Scene scene = new Scene(root);
-        
-        // Configurazione dello stage principale
+    public void start(Stage stage) throws IOException {
+        Scene scene = new Scene(loadFXML("RubricaProva"));
         stage.setScene(scene);
         stage.show();
+        scene.getRoot().requestFocus();
     }
 
     /**
-     * @brief Metodo main per avviare l'applicazione.
-     *
-     *Questo metodo invoca il metodo launch di JavaFX per iniziare l'esecuzione
-     *        dell'applicazione.
+     * @brief Setting della scena
      * 
-     * @param args Gli argomenti della riga di comando passati all'applicazione.
+     * Permette di settare il nodo Parent nella scena principale
+     * 
+     * @param fxml Il nome del file da cui ottenere in nodo principale
+     * 
+     * @throws IOException Eccezione del metodo loadFXML
+     */
+
+    /**
+     * @brief Caricamento nodo principale
+     * 
+     * Il metodo permette di ottenere il nodo Parent di un file fxml
+     * 
+     * @param fxml Il nome del file fxml da cui ottenere il nodo
+     * 
+     * @return Il nodo del file fxml specificato
+     * 
+     * @throws IOException Eccezione del caricamento del nodo Parent
+     */
+    static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+    
+    /**
+     * @brief Metodo per l'ottenimento del riferimento del file fxml
+     * 
+     * Questo metodo permette l'ottenimento del riferimento del file fxml specificato nella stringa
+     * 
+     * @param fxml Nome del file fxml da ottenere
+     * 
+     * @return L'oggetto FXMLLoader associato al file fxml 
+     */
+    public static FXMLLoader getFXML(String fxml){
+        return new FXMLLoader(App.class.getResource(fxml+".fxml"));
+    }
+
+    /**
+     * @brief Metodo standard di java
+     * 
+     * Questo metodo permette l'avvio del programma
+     * 
+     * @param args eventuali argomenti passati da riga-comando 
      */
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
     
 }
