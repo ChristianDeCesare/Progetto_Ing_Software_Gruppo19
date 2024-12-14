@@ -13,9 +13,8 @@
 
 package controller;
 
+import gestioneRubrica.Avviso;
 import gestioneRubrica.Rubrica;
-import java.awt.Button;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
@@ -26,56 +25,95 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class RubricaController implements Initializable {
 
     /**
-     *  Puntatore all'istanza di Rubrica gestita.
+     * Pannello di base sul quale è visualizzato il contatto.
+     */
+    @FXML
+    private StackPane contattoPane;
+    
+    /**
+     * Tabella visualizzazione dei contatti.
+     */
+    @FXML
+    private TableView<Contatto> rubricaList;
+    
+    /**
+     * Colonna dei cognomi della tabella.
+     */
+    @FXML
+    private TableColumn<Contatto, String> cognomeClm;
+    
+    /**
+     * Colonna dei nomi della tabella.
+     */
+    @FXML
+    private TableColumn<Contatto, String> nomeClm;
+
+    /**
+     * Bottone di apertura pop-up per aggiunta contatto.
+     */
+    @FXML
+    private javafx.scene.control.Button addButton;
+    
+    /**
+     * Bottone per la rimozione del/dei contatto/i.
+     */
+    @FXML
+    private javafx.scene.control.Button removeButton;
+    
+    /**
+     * Bottone per l'importazione di rubrica da file esterno.
+     */
+    @FXML
+    private javafx.scene.control.Button importButton;
+    
+    /**
+     * Bottone per l'esportazione della rubrica su file esterno.
+     */
+    @FXML
+    private javafx.scene.control.Button exportButton;
+    
+    /**
+     * Bottone per la ricerca di contatti all'interno della rubrica.
+     */
+    @FXML
+    private javafx.scene.control.Button researchButton;
+    
+    /**
+     * Bottone per resettare la ricerca della rubrica.
+     */
+    @FXML
+    private javafx.scene.control.Button resetResearch;
+    
+    /**
+     * Campo di testa per la ricerca dei contatti tramite sottostringa nella rubrica.
+     */
+    @FXML
+    private javafx.scene.control.TextField researchField;
+    
+    /**
+     * Bottone per chiusura dell'interfaccia grafica.
+     */
+    @FXML
+    private javafx.scene.control.Button exitButton;
+            
+    /**
+     * Puntatore alla rubrica gestita.
      */
     private Rubrica rubricaPointer;
-
+    
     /**
-     *  Tabella per visualizzare la lista dei contatti nella Rubrica.
+     * Puntatore al controller visualizzato sul "pannello del contatto".
      */
-    private TableView rubricaList;
-
-    /**
-     *  Pulsante per rimuovere un contatto selezionato dalla Rubrica.
-     */
-    private Button removeButton;
-
-    /**
-     * Pulsante per avviare la ricerca di contatti in rubrica
-     */
-    private Button researchButton;
-
-    /**
-     * Pulsante per aggiungere un nuovo contatto alla Rubrica.
-     */
-    private Button addButton;
-
-    /**
-     * Campo di testo per cercare contatti nella Rubrica.
-     */
-    private TextField researchField;
-
-    /**
-     *  Pulsante per importare contatti nella Rubrica.
-     */
-    private Button importButton;
-
-    /**
-     *  Pulsante per esportare contatti dalla Rubrica.
-     */
-    private Button exportButton;
-
-    /**
-     * @brief Pulsante per uscire dall'applicazione.
-     */
-    private Button exitButton;
+    ContattoController contattoController;
 
     /**
     * @brief Inizializza il controller al caricamento della scena.

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -482,5 +483,28 @@ public class ContattoController implements Initializable {
         //get della finestra di visualizzazione, con conseguente casting della finestra come Stage per invocare il metodo di chiusura
       ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
 
+    }
+    
+    /**
+     * @brief Controllo indirizzo posta elettronica
+     * 
+     * Questo metodo permette di controllare che la stringa passata sia concorde con le regole generali
+     * di un indirizzo mail
+     * 
+     * @param mail La stringa da controllare
+     * @return Il risultato del controllo
+     */
+    private boolean mailControl(String mail){
+        if (mail.isEmpty()) //controllo che la stringa sia vuota
+            return true;
+        
+        //genero una stringa contenente le regole generali di un indirizzo e-mail
+        String emailRegex = "^[a-zA-Z-.0-9]+@[a-z]+[.]+[a-zA-Z]{2,}$"; 
+       
+        //creo un oggetto di tipo Pattern per rendere utilizzabile e confrontabile la stringa emailRegex
+        Pattern pattern = Pattern.compile(emailRegex);
+      
+        //controllo che la stringa segua le regole definite in emailRegex
+        return pattern.matcher(mail).matches();
     }
 }
