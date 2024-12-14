@@ -46,16 +46,6 @@ public class App extends Application {
     }
 
     /**
-     * @brief Setting della scena
-     * 
-     * Permette di settare il nodo Parent nella scena principale
-     * 
-     * @param fxml Il nome del file da cui ottenere in nodo principale
-     * 
-     * @throws IOException Eccezione del metodo loadFXML
-     */
-
-    /**
      * @brief Caricamento nodo principale
      * 
      * Il metodo permette di ottenere il nodo Parent di un file fxml
