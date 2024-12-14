@@ -142,7 +142,7 @@ public class Rubrica {
           //creazione rubrica temporanea
         Rubrica temp = new Rubrica();
         for(Contatto c : contactList){ //ciclo di controllo su tutti i contatti della lista
-            if(c.getNome().toLowerCase().startsWith(s) || c.getCognome().toLowerCase().startsWith(s)) //controllo presenza sottostringa
+            if(c.getNome().toLowerCase().startsWith(s.toLowerCase()) || c.getCognome().toLowerCase().startsWith(s.toLowerCase())) //controllo presenza sottostringa
                 temp.aggiungiContatto(c); //aggiunta contatto avente la sottostringa nel nominativo alla rubrica temporanea
         }
         //restituzione riferimento alla rubrica temporanea
@@ -237,17 +237,19 @@ public class Rubrica {
      * 
      */
     public void esportaRubrica(String nomefile){
-        try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(nomefile)))) {   
+        //Try per creazione del file e inizializzazione oggetto di tipo PrintWriter
+     try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(nomefile)))) {   
             
+            //Stampa su file della seguente linea
+            pw.println("RUBRICA");
             pw.println("COGNOME;NOME;NUMERO 1;NUMERO 2;NUMERO 3;EMAIL 1;EMAIL 2; EMAIL3");   
             
-            
+            //ripetizione ciclo per ogni contatto presente nella lista
             for(Contatto c : contactList){
                 
-               
+                //scrittura su linea del file dei dati del contatto
                 pw.print(c.getCognome());
                 pw.append(';');
-                
                 
                 pw.print(c.getNome());
                 pw.append(';');          
@@ -271,16 +273,15 @@ public class Rubrica {
                 
                 pw.println(emails[2]);
                 
-                
-            
             }
             
             
-        }catch (IOException e) {
+        }catch (IOException e) /*Cattura eccezione*/{
         
-        System.err.println("Errore durante la scrittura del file: ");
+        System.err.println("Errore durante la scrittura del file");
+        Avviso.errore("Errore", "Errore esportazione", "Errore durante la scrittura del file");
+        }
         
-    }
     }
     
 }

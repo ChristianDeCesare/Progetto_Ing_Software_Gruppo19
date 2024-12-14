@@ -4,6 +4,8 @@
  */
 package GestioneRubrica;
 
+import gestioneRubrica.Rubrica;
+import gestioneRubrica.Contatto;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,15 +33,7 @@ public class RubricaTest {
     public RubricaTest() {
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-        //rubrica.aggiungiContatto(contatto2);
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-        //rubrica.rimuoviContatto(rubrica.getContactList());
-    }
+  
     
     @BeforeEach
     public void setUp() {
@@ -59,9 +53,7 @@ public class RubricaTest {
         rubrica.aggiungiContatto(contatto2);
     }
     
-    @AfterEach
-    public void tearDown() {
-    }
+   
 
     /**
      * Test of aggiungiContatto method, of class Rubrica.
@@ -127,19 +119,15 @@ public class RubricaTest {
         rubricaTest1.aggiungiContatto(contatto2);
         
         String s="Lor";
+        
         Rubrica temp = new Rubrica();
-        for(Contatto c : rubricaTest1.getContactList()){ //ciclo di controllo su tutti i contatti della lista
-            if(c.getNome().toLowerCase().startsWith(s) || c.getCognome().toLowerCase().startsWith(s)) //controllo presenza sottostringa
-                temp.aggiungiContatto(c); //aggiunta contatto avente la sottostringa nel nominativo alla rubrica temporanea
-        }
         
+        temp = rubricaTest1.ricercaContatti(s);
         
-
-        
-
         assertNotNull(temp);
-        assertEquals(0, temp.getContactList().size()); // Deve esserci solo 1 contatto
+        assertEquals(1, temp.getContactList().size()); // Deve esserci solo 1 contatto
         assertTrue(temp.getContactList().stream().anyMatch(c -> c.getNome().equals("Lorenzo")));
+    
     }
 
 
@@ -151,7 +139,7 @@ public void testImportaRubrica() throws Exception {
     System.out.println("importaRubrica Test");
 
     // Creazione di un file di test temporaneo
-    String nomefile = "rubrica_test.txt";
+    String nomefile = "rubrica_test.csv";
     try (PrintWriter writer = new PrintWriter(nomefile)) {
         writer.println("RUBRICA");
         writer.println("Cognome;Nome;Numero1;Numero2;Numero3;Email1;Email2;Email3");
@@ -184,7 +172,7 @@ public void testImportaRubrica() throws Exception {
 System.out.println("esportaRubrica Test");
 
     // Nome del file temporaneo
-    String nomefile = "rubrica_export_test.txt";
+    String nomefile = "rubrica_export_test.csv";
 
     // Creazione di una rubrica con dati di esempio
     Rubrica instance = new Rubrica();

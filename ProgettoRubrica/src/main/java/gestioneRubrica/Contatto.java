@@ -189,7 +189,7 @@ public class Contatto implements Comparable<Contatto> {
      * @return un valore negativo, zero o positivo se questo contatto è rispettivamente
      *         minore, uguale o maggiore rispetto al contatto specificato.
      * 
-     * @throws da determinare quali eccezioni usare, ad esempio
+     * @throw da determinare quali eccezioni usare, ad esempio
      *         NullPointerException se il contatto fornito è {@code null}.
      */
     @Override

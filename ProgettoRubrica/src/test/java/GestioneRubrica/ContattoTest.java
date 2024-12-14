@@ -21,16 +21,15 @@ public class ContattoTest {
     public ContattoTest() {
     }
     
-    @BeforeAll
+    
     public void setUpClass() {
         System.out.println("Inizializzazione contatto standard");
         // Prima di ogni test, creiamo un nuovo contatto
         contatto = new Contatto();
     }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
+    
+    
     
     @BeforeEach
     public void setUp() {
@@ -40,9 +39,7 @@ public class ContattoTest {
         
     }
     
-    @AfterEach
-    public void tearDown() {
-    }
+   
 
     
     @Test
