@@ -20,9 +20,15 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class RubricaController implements Initializable {
 
@@ -86,32 +92,90 @@ public class RubricaController implements Initializable {
     
     }
     
-
+    
     /**
-     * @brief Aggiunge un nuovo contatto alla Rubrica.
+     * @brief Imposta la tabella con una nuova istanza di Rubrica.
      * 
-     * @param e evento che attiva l'aggiunta del contatto
+     * @param r la nuova Rubrica da visualizzare nella tabella
+     * 
+     * @pre r deve essere diverso da null.
+     * 
+     * @post il controller conterrà il puntatore alla rubrica r.
      */
-    private void add(ActionEvent e) {
+    private void setRubricaList(Rubrica r) {
     
     }
 
     /**
-     * @brief Effettua una ricerca di contatti nella Rubrica.
+     * @brief Metodo gestione aggiunta contatto
      * 
-     * @param e evento che attiva la ricerca
+     * Questo metodo permette l'apertura di un pop-up per le operazioni di creazione e inserimento di un nuovo contatto nella tabella 
+     * 
+     * @param event L'evento che ha generato l'azione di aggiunta
+     * 
+     * @throws IOException Eccezione per la gestione di errori durante l'apertura della finestra di aggiunta del contatto
      */
-    private void research(ActionEvent e) {
+    @FXML
+    private void add(javafx.event.ActionEvent event) throws IOException {
+        
+        //Operazioni per apertura finestra di creazione
+        FXMLLoader f = App.getFXML("Contatto");
+        Parent root = f.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        
+        //Creazione del controller del contatto
+        ContattoController controller = f.getController(); 
+        if (controller != null) { //controllo effettiva creazione del controller
+            controller.setController(this.rubricaPointer); 
+        } else {
+            System.out.println("Il controller è nullo");
+        }
+       
+        stage.show(); //visualizzazione pop-up di aggiunta
+        
+    }
+    /**
+     * @brief Ricerca contatti
+     * 
+     * Questo metodo permette la ricerca dei contatti tramite una stringa di testo
+     * 
+     * @param event L'evento che ha generato l'operazione di ricerca
+     */
+    @FXML
+    private void research(javafx.event.ActionEvent event) {
     
+    if(!researchField.getText().isEmpty()) //controllo che la barra ricerca sia vuota
+        
+            rubricaList.setItems(rubricaPointer.ricercaContatti(researchField.getText()).getContactList()); //visualizzo tutta la rubrica
+    
+        else
+        
+            rubricaList.setItems(rubricaPointer.getContactList()); //visualizzo la sottoRubrica
+ 
     }
 
-    /**
-     * @brief Elimina un contatto selezionato dalla Rubrica.
-     * 
-     * @param e evento che attiva l'eliminazione
-     */
-    private void delete(ActionEvent e) {
+    @FXML
+    private void delete(javafx.event.ActionEvent event) {
     
+    //carico la lista di contatti da eliminare
+    ObservableList<Contatto> temp = rubricaList.getSelectionModel().getSelectedItems();
+    
+    //controllo che la lista non sia nè null nè vuota
+    if(temp != null && temp.isEmpty())
+        return;
+
+    //mostro il segnale di avviso e aspetto il risultato della conferma
+    if (Avviso.conferma("Attenzione", "Conferma Rimozione","Sei sicuro di voler eliminare il/i contatto/i?")) {
+        
+        //rimuovo il contatto e ripulisco il pannello del contatto
+        rubricaPointer.rimuoviContatto(temp);
+        contattoPane.getChildren().clear();
+    
+        }
+        
     }
 
     /**
