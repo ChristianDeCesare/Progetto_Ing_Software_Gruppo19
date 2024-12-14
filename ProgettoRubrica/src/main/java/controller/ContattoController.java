@@ -340,7 +340,7 @@ public class ContattoController implements Initializable {
      *
      * @param c l'evento che ha generato l'azione di conferma.
      */
-    private void confirm(ActionEvent c) {
+    private void confirm(javafx.event.ActionEvent c) {
         if(!typeController) //controllo tipo di controller
             confAdd();
         else
@@ -399,7 +399,7 @@ public class ContattoController implements Initializable {
      * @param c L'evento che ha generato l'azione di conferma.
      */
     @FXML
-    private void modify(ActionEvent c) {
+    private void modify(javafx.event.ActionEvent c) {
         
         //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
