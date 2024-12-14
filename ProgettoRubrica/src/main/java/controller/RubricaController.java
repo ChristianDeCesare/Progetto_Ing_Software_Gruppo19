@@ -13,6 +13,7 @@
 
 package controller;
 
+import com.mycompany.progettorubrica.App;
 import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
@@ -162,7 +163,11 @@ public class RubricaController implements Initializable {
         //gestisco L'evento di selezione singola e multipla dei contatti e lo associo alla tabella
         EventHandler<MouseEvent> ClickHandler = event ->{
             if(!event.isControlDown())
-                openContact(null); //apre lo studente
+                try {
+                    openContact(null); //apre lo studente
+            } catch (IOException ex) {
+                Logger.getLogger(RubricaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         };
         rubricaList.setOnMouseClicked(ClickHandler);
@@ -254,8 +259,27 @@ public class RubricaController implements Initializable {
      * 
      * @param e evento che attiva l'apertura del contatto
      */
-    private void openContact(ActionEvent e) {
+    private void openContact(javafx.event.ActionEvent event) throws IOException {
     
+        Contatto temp = (Contatto) rubricaList.getSelectionModel().getSelectedItem(); //Carica il contatto selezionato dalla tabella
+                
+        if(temp == null) //controllo che il contatto non sia null
+            return;
+        
+        contattoPane.setVisible(true); //rendo visibile il pannello del contatto
+
+        //carico il nodo Parent dal file fxml del contatto
+        FXMLLoader loader = App.getFXML("Contatto"); 
+        StackPane contactPane = loader.load();
+
+        //creo e inizializzo il controller
+        ContattoController controller = loader.getController();
+        controller.setController(temp, rubricaPointer, rubricaList);
+
+        //Ripulisco il pannello del contatto e visualizzo l'interfaccia del contatto
+        contattoPane.getChildren().clear();
+        contattoPane.getChildren().add(contactPane);
+  
     }
 
     /**
