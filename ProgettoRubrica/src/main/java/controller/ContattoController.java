@@ -377,8 +377,7 @@ public class ContattoController implements Initializable {
         nameField.requestFocus();
         nameField.positionCaret(nameField.getText().length()); //posizione il cursore alla fine del testo del textField
         });
-        
-        
+          
     }
 
     /**
