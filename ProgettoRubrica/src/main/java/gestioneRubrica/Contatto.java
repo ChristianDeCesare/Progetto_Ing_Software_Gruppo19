@@ -45,9 +45,10 @@ public class Contatto implements Comparable<Contatto> {
 
     
     /**
-     * Costruttore predefinito della classe Contatto,
+     * @brief Costruttore predefinito della classe Contatto,
      * il quale assegna un valore predefinito agli attibuti 
      * del contatto nel momento in cui viene creato l'oggetto.
+     * Per scelta progettuale, inizializziamo ed assegnamo il valore "" alle stringhe e non null
      * 
      */
     
@@ -186,11 +187,10 @@ public class Contatto implements Comparable<Contatto> {
      *
      * @param c l'oggetto di tipo {@link Contatto.java}, con cui confrontare
      * 
-     * @return un valore negativo, zero o positivo se questo contatto è rispettivamente
+     * @return un valore intero: negativo, zero o positivo se questo contatto è rispettivamente
      *         minore, uguale o maggiore rispetto al contatto specificato.
      * 
-     * @throw da determinare quali eccezioni usare, ad esempio
-     *         NullPointerException se il contatto fornito è {@code null}.
+     * 
      */
     @Override
     public int compareTo(Contatto c) {
@@ -210,12 +210,32 @@ public class Contatto implements Comparable<Contatto> {
         return report;
         
     }
-
+    
+    /**
+    * @brief Calcola il codice hash per l'oggetto corrente.
+    * 
+    * Il codice hash è calcolato combinando i campi "cognome" e "nome" dell'oggetto
+    * e utilizzando il metodo `hashCode` della classe String.
+    * 
+    * @return il codice hash dell'oggetto
+    */
     @Override
     public int hashCode(){
         return (this.cognome + this.nome).hashCode();
     }
     
+    /**
+    * @brief Confronta l'oggetto corrente con un altro oggetto per verificarne l'uguaglianza.
+    * 
+    * Due oggetti sono considerati uguali se:
+    * - Sono la stessa istanza (riferimento uguale);
+    * - Non sono null;
+    * - Sono entrambi istanze della classe `Contatto`;
+    * - Hanno lo stesso valore per i campi "nome" e "cognome".
+    * 
+    * @param o l'oggetto da confrontare con l'oggetto corrente.
+    * @return {@code true} se gli oggetti sono uguali, {@code false} altrimenti.
+    */
     @Override
     public boolean equals(Object o){
         if(o == this)

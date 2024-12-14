@@ -41,11 +41,12 @@ public class ContattoTest {
 
     @Test
     void testSetAndGetNumeri() {
-        // Testiamo i numeri di telefono
+        // Testiamo i metodi set e get numeri di telefono
         contatto.setNumero1("1234567890");
         contatto.setNumero2("0987654321");
         contatto.setNumero3("1122334455");
-
+        
+        //il metodo get restituisce un array di stringhe a differenza dei set dei numeri di telefono
         String[] numeri = contatto.getNumeri();
         assertEquals("1234567890", numeri[0], "Il primo numero non è stato impostato correttamente.");
         assertEquals("0987654321", numeri[1], "Il secondo numero non è stato impostato correttamente.");
@@ -54,11 +55,12 @@ public class ContattoTest {
 
     @Test
     void testSetAndGetEmails() {
-        // Testiamo gli indirizzi email
+        // Testiamo i set e get gli indirizzi email
         contatto.setEmail1("marco.rossi@example.com");
         contatto.setEmail2("m.rossi@example.com");
         contatto.setEmail3("rossi.m@example.com");
 
+        //il metodo getEmails restituisce un array
         String[] emails = contatto.getEmails();
         assertEquals("marco.rossi@example.com", emails[0], "Il primo email non è stato impostato correttamente.");
         assertEquals("m.rossi@example.com", emails[1], "Il secondo email non è stato impostato correttamente.");
@@ -74,7 +76,8 @@ public class ContattoTest {
 
         contatto.setNome("Marco");
         contatto.setCognome("Rossi");
-
+        
+        //l'assert viene attivato se i contatti non sono uguali 
         assertEquals(0, contatto.compareTo(contatto2), "I contatti dovrebbero essere uguali.");
     }
 
@@ -100,7 +103,8 @@ public class ContattoTest {
 
         contatto.setNome("Marco");
         contatto.setCognome("Rossi");
-
+        
+        //l'assert deve verificare che la condizione sia vera altrimenti deve scrivere quel messaggio che avvisa dell'errore
         assertTrue(contatto.compareTo(contatto2) > 0, "Il nome Marco dovrebbe essere minore di Alessandro.");
     }
     
@@ -113,7 +117,8 @@ public class ContattoTest {
 
         contatto.setNome("Marco");
         contatto.setCognome("Rossi");
-
+        
+        //l'assert deve verificare che i due contatti siano uguali altrimenti stampa a video quel messaggio di errore
         assertTrue(contatto.equals(contatto2), "I contatti dovrebbero essere uguali.");
     }
 
@@ -126,7 +131,8 @@ public class ContattoTest {
 
         contatto.setNome("Marco");
         contatto.setCognome("Rossi");
-
+        
+        //l'assert deve verificare che i contatti NON siano uguali, altrimenti stampa a video quel messaggio di errore
         assertFalse(contatto.equals(contatto2), "I contatti dovrebbero essere diversi.");
     }
 }
