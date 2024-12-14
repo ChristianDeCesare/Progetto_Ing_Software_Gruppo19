@@ -315,9 +315,53 @@ public class ContattoController implements Initializable {
      * @param c l'evento che ha generato l'azione di conferma.
      */
     private void confirm(ActionEvent c) {
-        // Da implementare
+        if(!typeController) //controllo tipo di controller
+            confAdd();
+        else
+            confMod();
     }
+    private void confAdd(){
+      
+        boolean flag = true;
+           
 
+        
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) {
+            Avviso.errore("Errore","Errore Nominativi","Nominativi inseriti erroneamente");
+            flag = false;
+        }
+
+                
+    
+        if (!(numberControl(number1Field.getText())
+        && numberControl(number2Field.getText())
+        && numberControl(number3Field.getText())
+        && mailControl(email1Field.getText())
+        && mailControl(email2Field.getText())
+        && mailControl(email3Field.getText()))){
+            Avviso.errore("Errore","Errore Recapiti","Recapiti inseriti erroneamente");
+            flag = false;
+        }
+
+        if (flag) {
+            contactPointer = new Contatto();
+            contactPointer.setNome(nameField.getText());
+            contactPointer.setCognome(surnameField.getText());
+            contactPointer.setEmail1(email1Field.getText());
+            contactPointer.setEmail2(email2Field.getText());
+            contactPointer.setEmail3(email3Field.getText());
+            contactPointer.setNumero1(number1Field.getText());
+            contactPointer.setNumero2(number2Field.getText());
+            contactPointer.setNumero3(number3Field.getText());
+                        
+            switch(rubricaPointer.aggiungiContatto(contactPointer)){
+                case 0: goBack(null); break;
+                case 1: Avviso.info("Attenzione", "Contatto Già Esistente", "Il nominativo inserito risulta già presente in rubrica"); break;
+                case 2: Avviso.errore("Errore", "Errore Aggiunta", "Non è stato possibile aggiungere il contatto alla rubrica"); break;
+                default: Avviso.errore("Errore" , "Valore Di Ritorno Non Riconosciuto", "Il valore di controllo non è stato riconosciuto");
+            }
+        }    
+    }
     /**
      * @brief Abilita modifiche al contatto
      *
