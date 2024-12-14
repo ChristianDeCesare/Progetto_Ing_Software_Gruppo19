@@ -174,20 +174,6 @@ public class RubricaController implements Initializable {
         rubricaList.setOnKeyPressed(escHandler);
         
     }
-    
-    
-    /**
-     * @brief Imposta la tabella con una nuova istanza di Rubrica.
-     * 
-     * @param r la nuova Rubrica da visualizzare nella tabella
-     * 
-     * @pre r deve essere diverso da null.
-     * 
-     * @post il controller conterrà il puntatore alla rubrica r.
-     */
-    private void setRubricaList(Rubrica r) {
-    
-    }
 
     /**
      * @brief Metodo gestione aggiunta contatto
