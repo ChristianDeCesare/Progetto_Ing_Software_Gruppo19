@@ -17,7 +17,6 @@ import com.mycompany.progettorubrica.App;
 import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;

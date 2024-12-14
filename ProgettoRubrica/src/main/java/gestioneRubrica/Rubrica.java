@@ -38,7 +38,9 @@ public class Rubrica {
     private ObservableList<Contatto> contactList;
     
     /**
-     * Costruttore della classe Rubrica, che sarà inizialmente vuota
+     *  @brief Costruttore della classe Rubrica, che sarà inizialmente vuota
+     * 
+     * Crea un' ArrayList osservabile che conterrà tutti i contatti della rubrica 
      * 
      */
     public Rubrica(){
@@ -73,27 +75,27 @@ public class Rubrica {
     public int aggiungiContatto(Contatto c){
         
       if(c == null)// controllo puntatore null
-          throw new NullPointerException("Puntatore contatto = null"); //Lancio eccezione
+          throw new NullPointerException("Puntatore contatto = null");    //Lancio eccezione
       
-        if(contactList.contains(c)) //controllo contatto già presente
+        if(contactList.contains(c))    //controllo contatto già presente
             return 1;
 
 
-        if(this.contactList.add(c)){//aggiunta e controllo aggiunta alla rubrica
+        if(this.contactList.add(c)){     //aggiunta e controllo aggiunta alla rubrica
         //sorting della lista
         Collections.sort(contactList);
         return 0;
      }
-     return 2;
+        return 2;
     }
     
     /**
      *  @brief Rimuove un contatto da una lista osservabile di contatti.
      *
      *Questo metodo consente di rimuovere un oggetto di tipo {@link Contatto.java} 
-     *         da una lista osservabile ({@code ObservableList}). La rimozione può avvenire 
-     *         in base a criteri definiti nell'implementazione del metodo (ad esempio, 
-     *         corrispondenza con un contatto esistente nella lista).
+     *da una lista osservabile ({@code ObservableList}). La rimozione può avvenire 
+     *in base a criteri definiti nell'implementazione del metodo (ad esempio, 
+     *corrispondenza con un contatto esistente nella lista).
      *
      * @param list la lista osservabile ({@code ObservableList<Contatto>}) 
      *             da cui rimuovere il contatto.
@@ -131,7 +133,7 @@ public class Rubrica {
     /**
      * @brief Ricerca nella lista osservabile i contatti avente corrispondenza con la stringa inserita dall'utente
      * 
-     * @param s la stringa inserita nel textfield corrispondente dall'utente
+     * @param s la stringa inserita dall'utente nel textfield corrispondente alla ricerca
      * 
      * @return la sotto-rubrica cui fanno parte i contatti avente corrispondenza alla stringa {@code s}
      * 
@@ -156,7 +158,7 @@ public class Rubrica {
      * @brief Importa da file esterno una rubrica intera
      * 
      * Viene richiamato questo metodo nel momento in cui l'utente preme il bottone corrispondente
-     * Si gestiscono anche i casi in cui il file scelto dall'utente non ha il formato adatto
+     * Si gestiscono anche i casi in cui il file scelto dall'utente non ha il formato adatto o non contiene una rubrica
      * 
      * @param nomefile Il nome del file da cui importare la rubrica
      * 
@@ -164,8 +166,9 @@ public class Rubrica {
      * 
      * @post La rubrica contenuta nel file avente come nome nomefile viene caricata come rubrica nell'applicazione
      * 
-     * @return Riferimento alla rubrica importata
+     * @return Riferimento alla nuova rubrica importata
      * @throws java.io.FileNotFoundException Eccezione per la gestione di file non trovato
+     * @throws java.io.IOException
      */
     public Rubrica importaRubrica(String nomefile) throws FileNotFoundException, IOException{
     
@@ -224,9 +227,9 @@ public class Rubrica {
     
     /**
      * @brief Esporta la rubrica intera
-     *  * 
+     *  
      * Si richiama questo metodo quando l'utente preme sul bottone corrispondente
-     *        e si determina non solo la locazione del file ma anche la sua estensione
+     * e si determina non solo la locazione del file ma anche la sua estensione
      * 
      * @param nomefile Il nome del file su cui esportare la rubrica
      * 
