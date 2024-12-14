@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -231,6 +232,29 @@ public class RubricaController implements Initializable {
         
             rubricaList.setItems(rubricaPointer.getContactList()); //visualizzo la sottoRubrica
  
+    }
+    
+    /**
+     * @brief Metodo reset ricerca
+     * 
+     * Questo Metodo permette il reset della ricerca, mostrando nuovamente la rubrica "originale" 
+     * e svuotando la barra ricerca
+     * 
+     * @param event L'evento che ha generato l'operazione di reset 
+     */
+    @FXML
+    private void resetResearch(javafx.event.ActionEvent event) {
+        
+        //resetta il testo del campo di ricerca
+        researchField.setText("");
+        
+        //resetta la visualizzazione della lista
+        rubricaList.setItems(rubricaPointer.getContactList());
+        
+        Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
+        researchField.requestFocus();
+        researchField.positionCaret(0); //posizione il cursore all'inizio del textField
+        });
     }
 
     @FXML
