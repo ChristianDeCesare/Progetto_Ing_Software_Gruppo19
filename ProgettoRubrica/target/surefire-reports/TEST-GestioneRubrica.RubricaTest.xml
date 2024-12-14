@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="GestioneRubrica.RubricaTest" time="0.048" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="GestioneRubrica.RubricaTest" time="0.088" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IT"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_211\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\matti\AppData\Local\Temp\surefire3594573962017192128\surefirebooter-20241214201833565_3.jar C:\Users\matti\AppData\Local\Temp\surefire3594573962017192128 2024-12-14T20-18-33_020-jvmRun1 surefire-20241214201833565_1tmp surefire_0-20241214201833565_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\matti\AppData\Local\Temp\surefire4324245219640641519\surefirebooter-20241214204429842_3.jar C:\Users\matti\AppData\Local\Temp\surefire4324245219640641519 2024-12-14T20-44-28_959-jvmRun1 surefire-20241214204429842_1tmp surefire_0-20241214204429842_2tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\matti\OneDrive\Documenti\GitHub\progettoRubrica\Progetto_Ing_Software_Gruppo19\ProgettoRubrica\target\test-classes;C:\Users\matti\OneDrive\Documenti\GitHub\progettoRubrica\Progetto_Ing_Software_Gruppo19\ProgettoRubrica\target\classes;C:\Users\matti\.m2\repository\org\junit\jupiter\junit-jupiter\5.11.3\junit-jupiter-5.11.3.jar;C:\Users\matti\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.3\junit-jupiter-params-5.11.3.jar;C:\Users\matti\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.3\junit-jupiter-engine-5.11.3.jar;C:\Users\matti\.m2\repository\org\junit\platform\junit-platform-engine\1.11.3\junit-platform-engine-1.11.3.jar;C:\Users\matti\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\matti\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\matti\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\matti\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\matti"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\matti\AppData\Local\Temp\surefire3594573962017192128\surefirebooter-20241214201833565_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\matti\AppData\Local\Temp\surefire4324245219640641519\surefirebooter-20241214204429842_3.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_211\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_211\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_211\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -61,24 +61,24 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testRimuoviContatto" classname="GestioneRubrica.RubricaTest" time="0.014">
+  <testcase name="testRimuoviContatto" classname="GestioneRubrica.RubricaTest" time="0.022">
     <system-out><![CDATA[aggiungiContatto Test
 ]]></system-out>
   </testcase>
-  <testcase name="testAggiungiContatto" classname="GestioneRubrica.RubricaTest" time="0.001">
+  <testcase name="testAggiungiContatto" classname="GestioneRubrica.RubricaTest" time="0.002">
     <system-out><![CDATA[aggiungiContatto Test
 ]]></system-out>
   </testcase>
-  <testcase name="testGetContactList" classname="GestioneRubrica.RubricaTest" time="0"/>
-  <testcase name="testRicercaContattiConNomeEsatto" classname="GestioneRubrica.RubricaTest" time="0.001">
+  <testcase name="testGetContactList" classname="GestioneRubrica.RubricaTest" time="0.003"/>
+  <testcase name="testRicercaContattiConNomeEsatto" classname="GestioneRubrica.RubricaTest" time="0.003">
     <system-out><![CDATA[RicercaContatti Test
 ]]></system-out>
   </testcase>
-  <testcase name="testImportaRubrica" classname="GestioneRubrica.RubricaTest" time="0.014">
+  <testcase name="testImportaRubrica" classname="GestioneRubrica.RubricaTest" time="0.029">
     <system-out><![CDATA[importaRubrica Test
 ]]></system-out>
   </testcase>
-  <testcase name="testEsportaRubrica" classname="GestioneRubrica.RubricaTest" time="0.012">
+  <testcase name="testEsportaRubrica" classname="GestioneRubrica.RubricaTest" time="0.018">
     <system-out><![CDATA[esportaRubrica Test
 ]]></system-out>
   </testcase>

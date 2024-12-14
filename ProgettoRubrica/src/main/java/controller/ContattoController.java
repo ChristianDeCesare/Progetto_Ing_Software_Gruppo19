@@ -251,6 +251,9 @@ public class ContattoController implements Initializable {
         //invocato metodo disableModify con attributo "true"
         disableModify(true);
         
+        //rendo invisibile il bottone di uscita
+        exitButton.setVisible(false);
+        
         
         
     }
@@ -418,55 +421,60 @@ public class ContattoController implements Initializable {
         if (contactPointer == null) { //controllo che il puntatore al contatto non sia null
             System.out.println("Nessun contatto selezionato.");
             return;
-        }    
- 
-      
-      boolean flag = true;
+        }   
 
 
         if (!nominativeControl(nameField.getText(), surnameField.getText())) { //controllo nominativi
                 Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
-                flag = false;
+                return;
             }
 
                 
     
-            if (!(numberControl(number1Field.getText()) //controllo recapiti
-                    && numberControl(number2Field.getText())
-                    && numberControl(number3Field.getText())
-                    && mailControl(email1Field.getText())
-                    && mailControl(email2Field.getText())
-                    && mailControl(email3Field.getText()))) 
+        if (!(numberControl(number1Field.getText()) //controllo recapiti
+            && numberControl(number2Field.getText())
+            && numberControl(number3Field.getText())
+            && mailControl(email1Field.getText())
+            && mailControl(email2Field.getText())
+            && mailControl(email3Field.getText()))){
     
-                {
-    
-                    Avviso.errore("Errore", "Errore Recapiti","Recapiti modificati erroneamente");
-                    flag = false;
-    
-    }
+            Avviso.errore("Errore", "Errore Recapiti","Recapiti modificati erroneamente");
+            return;
+        }
 
 
             
-                if (flag) {//controllo flag
-                        //modifico contatto e riordino rubrica
-                        contactPointer.setNome(nameField.getText());
-                        contactPointer.setCognome(surnameField.getText());
-                        contactPointer.setEmail1(email1Field.getText());
-                        contactPointer.setEmail2(email2Field.getText());
-                        contactPointer.setEmail3(email3Field.getText());
-                        contactPointer.setNumero1(number1Field.getText());
-                        contactPointer.setNumero2(number2Field.getText());
-                        contactPointer.setNumero3(number3Field.getText());
-                        
-                        Collections.sort(rubricaPointer.getContactList());
-                        
+        //creo contatto temporaneo per controllo omonimia
+        Contatto temp = new Contatto();
+        temp.setNome(nameField.getText());
+        temp.setCognome(surnameField.getText());
 
-                        disableModify(true);
-                        
-                        
-                       tablePointer.refresh();    
+        //controllo la modifica effettuata
+        if(!(contactPointer.getNome().equals(nameField.getText()) && contactPointer.getCognome().equals(surnameField.getText()))
+            && rubricaPointer.getContactList().contains(temp)){
+            Avviso.info("Avviso", "Omonimia", "Contatto già esistente in rubrica");
+            return;
+        }       
+
+        //modifico contatto e riordino rubrica
+        contactPointer.setNome(nameField.getText());
+        contactPointer.setCognome(surnameField.getText());
+
+        contactPointer.setEmail1(email1Field.getText());
+        contactPointer.setEmail2(email2Field.getText());
+        contactPointer.setEmail3(email3Field.getText());
+        contactPointer.setNumero1(number1Field.getText());
+        contactPointer.setNumero2(number2Field.getText());
+        contactPointer.setNumero3(number3Field.getText());
+
+        Collections.sort(rubricaPointer.getContactList());
+
+
+        disableModify(true);
+
+
+       tablePointer.refresh();    
     
-                    }
 
     }
     
