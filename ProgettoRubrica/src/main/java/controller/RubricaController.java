@@ -418,7 +418,17 @@ public class RubricaController implements Initializable {
      
     }
 
-   @FXML
+    
+/**
+ * @brief Chiude la finestra attualmente visualizzata.
+ * 
+ * Questo metodo, in seguito al click sull'apposito pulsante, recupera la finestra 
+ * associata alla scena corrente e la chiude utilizzando il metodo close() della classe Stage.
+ * 
+ * @param event L'evento che attiva la chiusura della schermata corrente.
+ *              
+ */
+    @FXML
     private void goBack(javafx.event.ActionEvent event) {
         
         //get della finestra di visualizzazione, con conseguente casting della finestra come Stage per invocare il metodo di chiusura
