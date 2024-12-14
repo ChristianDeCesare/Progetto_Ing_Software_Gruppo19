@@ -17,40 +17,21 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Acer
  */
 public class ContattoTest {
-    private Contatto contatto; //contatto da sfruttare per i test
-    public ContattoTest() {
-    }
-    
-    
-    public void setUpClass() {
-        System.out.println("Inizializzazione contatto standard");
-        // Prima di ogni test, creiamo un nuovo contatto
-        contatto = new Contatto();
-    }
-    
-    
-    
-    
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Inizializzazione contatto standard");
-        // Prima di ogni test, creiamo un nuovo contatto
-        contatto = new Contatto();
-        
-    }
-    
-   
+    private Contatto contatto;
 
-    
+    @BeforeEach
+    void setUp() {
+        // Prima di ogni test, creiamo un nuovo contatto
+        contatto = new Contatto();
+    }
+
     @Test
-    public void testSetAndGetNome() {
-        System.out.println("setNome e getNome");
+    void testSetAndGetNome() {
         // Testiamo i metodi set e get per il nome
         contatto.setNome("Marco");
         assertEquals("Marco", contatto.getNome(), "Il nome non è stato impostato correttamente.");
     }
 
-    
     @Test
     void testSetAndGetCognome() {
         // Testiamo i metodi set e get per il cognome
@@ -58,7 +39,6 @@ public class ContattoTest {
         assertEquals("Rossi", contatto.getCognome(), "Il cognome non è stato impostato correttamente.");
     }
 
-    
     @Test
     void testSetAndGetNumeri() {
         // Testiamo i numeri di telefono
@@ -84,7 +64,7 @@ public class ContattoTest {
         assertEquals("m.rossi@example.com", emails[1], "Il secondo email non è stato impostato correttamente.");
         assertEquals("rossi.m@example.com", emails[2], "Il terzo email non è stato impostato correttamente.");
     }
-    
+
     @Test
     void testCompareToEqual() {
         // Testiamo se due contatti con gli stessi nome e cognome sono uguali
@@ -110,19 +90,43 @@ public class ContattoTest {
 
         assertTrue(contatto.compareTo(contatto2) > 0, "Il cognome Rossi dovrebbe essere maggiore di Bianchi.");
     }
-
+    
     @Test
     void testCompareToDifferentNome() {
-        // Testiamo se il confronto tiene conto del nome
+        //Testiamo se il confronto tiene conto del nome
         Contatto contatto2 = new Contatto();
         contatto2.setNome("Alessandro");
         contatto2.setCognome("Rossi");
 
-        contatto.setNome("Mario");
+        contatto.setNome("Marco");
         contatto.setCognome("Rossi");
 
-        assertTrue(0< contatto.compareTo(contatto2), "Il nome Marco dovrebbe essere minore di Alessandro.");
-        //System.out.println("Nomi uguali");
+        assertTrue(contatto.compareTo(contatto2) > 0, "Il nome Marco dovrebbe essere minore di Alessandro.");
     }
     
+    @Test
+    void testEquals() {
+        // Testiamo se due contatti uguali sono considerati uguali
+        Contatto contatto2 = new Contatto();
+        contatto2.setNome("Marco");
+        contatto2.setCognome("Rossi");
+
+        contatto.setNome("Marco");
+        contatto.setCognome("Rossi");
+
+        assertTrue(contatto.equals(contatto2), "I contatti dovrebbero essere uguali.");
+    }
+
+    @Test
+    void testNotEquals() {
+        // Testiamo se due contatti con nomi o cognomi diversi non sono uguali
+        Contatto contatto2 = new Contatto();
+        contatto2.setNome("Luca");
+        contatto2.setCognome("Rossi");
+
+        contatto.setNome("Marco");
+        contatto.setCognome("Rossi");
+
+        assertFalse(contatto.equals(contatto2), "I contatti dovrebbero essere diversi.");
+    }
 }

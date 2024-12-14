@@ -194,19 +194,38 @@ public class Contatto implements Comparable<Contatto> {
      */
     @Override
     public int compareTo(Contatto c) {
-        if(c == null){ 
-            throw new NullPointerException("Il contatto fornito è null");
+
+        //controllo che i cognomi siano uguali;
+        int report = this.getCognome().compareToIgnoreCase(c.cognome);
+        if(report == 0){
+            return this.nome.compareToIgnoreCase(c.getNome());
         }
-        
-        // Confronta i cognomi
-        int confronto = this.cognome.compareTo(c.getCognome());
-        //se il cognome dell'istanza attuale precede il cognome del contatto passato, allora ritorna un valore negativo
-        //se i cognomi sono uguali allora ritorna 0
-        //se il cognome dell'istanza attuale seguee il cognome del contatto passato, allora ritorna un valore positivo
-        if(confronto != 0){
-            return confronto; //confronta i cognomi e determina se this.cognome precede il cognome del contatto passato
+        else{
+            if(this.cognome.isEmpty()) //se il primo contatto non ha cognome
+                return 1;
+                
+            if(c.getCognome().isEmpty()) //se il secondo contatto non ha cognome
+                return -1;
         }
+        return report;
         
-        return this.nome.compareTo(c.getNome()); //richiamato se i cognomi sono uguali ed è necessario verificare i nomi
+    }
+
+    @Override
+    public int hashCode(){
+        return (this.cognome + this.nome).hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o == this)
+            return true;
+        if(o == null)
+            return false;
+        if(!(o instanceof Contatto))
+            return false;
+         Contatto c = (Contatto) o;
+         
+        return this.nome.equals(c.getNome()) && this.cognome.equals(c.getCognome());
     }
 }
