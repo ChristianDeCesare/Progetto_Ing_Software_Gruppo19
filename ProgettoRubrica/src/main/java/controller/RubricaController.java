@@ -17,6 +17,7 @@ import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -261,8 +263,37 @@ public class RubricaController implements Initializable {
      * 
      * @param e evento che attiva l'esportazione
      */
-    private void exportRubrica(ActionEvent e) {
+    @FXML
+    private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
     
+        if(rubricaPointer.getContactList().isEmpty()){ //controllo che la rubrica non sia vuota
+            Avviso.info("Avviso","Rubrica Vuota","Non è possibile esportare una rubrica vuota");
+            return;
+        }
+        //creo un oggetto di tipo FileChooser
+         FileChooser fileChooser = new FileChooser();
+
+        //indico il tipo di estensione con la quale esportare la rubrica
+         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv");
+         fileChooser.getExtensionFilters().add(filter);
+
+         //mostro a schermo l'interfaccia di esportazione del file
+         File file = fileChooser.showSaveDialog(null); 
+
+         //controllo che il file non sia null
+         if(file != null){
+
+
+             rubricaPointer.esportaRubrica(file.getAbsolutePath()); //esporto la rubrica usando come nome il path completo
+
+             Avviso.info("Avviso", null,"La rubrica è stata esportata con successo");
+
+
+         }else{
+
+             System.out.println("Esportazione annullata");
+
+         }
     }
 
     /**
@@ -270,8 +301,50 @@ public class RubricaController implements Initializable {
      * 
      * @param e evento che attiva l'importazione
      */
-    private void importRubrica(ActionEvent e) {
+    @FXML
+    private void importRubrica(javafx.event.ActionEvent event) throws IOException {
     
+    FileChooser fileChooser = new FileChooser(); //creo l'oggetto FileChooser
+        
+    //indico le estensioni accettabili
+    FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv"); 
+    fileChooser.getExtensionFilters().add(filter);
+
+
+    //mostro a schermo la finestra di scelta del file
+    File file = fileChooser.showOpenDialog(null);
+        //controllo che il file non sia null
+        if (file != null) { 
+            
+            try {
+                
+       //creo la rubrica da importare
+        Rubrica nuovaRubrica = rubricaPointer.importaRubrica(file.getAbsolutePath());
+        
+        if(nuovaRubrica.getContactList().isEmpty()){//controllo che il file contenga una rubrica non vuota
+            Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota");
+            return;
+        }
+        //indico la nuova rubrica come quella principale
+        rubricaPointer = nuovaRubrica;
+
+        //lego la tabella alla nuova lista di contatti
+        rubricaList.setItems(rubricaPointer.getContactList());
+
+            
+        Avviso.info("Avviso", null, "La rubrica è stata importata con successo");
+    } catch (IOException e) {
+        
+        System.err.println("Errore durante l'importazione del file: " + e.getMessage());
+     
+    }
+
+        } else {
+    
+                System.out.println("Selezione del file annullata.");
+            }
+    
+     
     }
 
    
