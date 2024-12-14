@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 
 
 public class App extends Application {
-
     /**
      * @brief Metodo standard per l'avvio del programma
      * 
@@ -39,7 +38,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = new Scene(loadFXML("RubricaProva"));
+        Scene scene = new Scene(loadFXML("Rubrica"));
         stage.setScene(scene);
         stage.show();
         scene.getRoot().requestFocus();

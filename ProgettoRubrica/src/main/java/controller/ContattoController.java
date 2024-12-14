@@ -340,6 +340,7 @@ public class ContattoController implements Initializable {
      *
      * @param c l'evento che ha generato l'azione di conferma.
      */
+    @FXML
     private void confirm(javafx.event.ActionEvent c) {
         if(!typeController) //controllo tipo di controller
             confAdd();

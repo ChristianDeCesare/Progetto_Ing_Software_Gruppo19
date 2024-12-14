@@ -395,5 +395,12 @@ public class RubricaController implements Initializable {
      
     }
 
-   
+   @FXML
+    private void goBack(javafx.event.ActionEvent event) {
+        
+        //get della finestra di visualizzazione, con conseguente casting della finestra come Stage per invocare il metodo di chiusura
+      ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
+
+    }
+    
 }
