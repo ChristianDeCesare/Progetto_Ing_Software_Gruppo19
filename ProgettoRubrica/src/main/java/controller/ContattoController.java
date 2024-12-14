@@ -269,12 +269,6 @@ public class ContattoController implements Initializable {
         email2Field.setText(emails[1]);
         email3Field.setText(emails[2]);
         
-        //reso il bottone di conferma invisibile
-        confirmButton.setVisible(false);
-        
-        //reso il bottone di uscita invisibile e inutilizzabile
-        exitButton.setVisible(false);
-        
         //invocato metodo disableModify con attributo "true"
         disableModify(true);
         
@@ -397,5 +391,21 @@ public class ContattoController implements Initializable {
      */
     private void delete(ActionEvent c) {
         // Da implementare
+    }
+    
+        /**
+     * @brief Chiude l'interfaccia del controller
+     *
+     * Questo metodo viene invocato quando l'utente preme il bottone per uscire dall'interfaccia.
+     * Come conseguenza l'interfaccia viene chiusa.
+     *
+     * @param event L'evento che ha generato l'azione di chiusura.
+     */
+    @FXML
+    private void goBack(javafx.event.ActionEvent event) {
+        
+        //get della finestra di visualizzazione, con conseguente casting della finestra come Stage per invocare il metodo di chiusura
+      ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
+
     }
 }
