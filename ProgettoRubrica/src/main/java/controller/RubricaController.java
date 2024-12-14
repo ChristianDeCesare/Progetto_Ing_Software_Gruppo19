@@ -14,12 +14,18 @@
 package controller;
 
 import gestioneRubrica.Avviso;
+import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +33,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -128,6 +137,42 @@ public class RubricaController implements Initializable {
      @Override
     public void initialize(URL location, ResourceBundle resources) {
     
+        //rendo invisibile il pannello del contatto
+        contattoPane.setVisible(false);
+        
+        //creo la rubrica su cui lavorare
+        this.rubricaPointer = new Rubrica();
+        
+         
+       //lego le colonne della tabella ai campi nome e cognome dei contatti della rubrica 
+        nomeClm.setCellValueFactory(s -> { return new SimpleStringProperty(s.getValue().getNome()); });
+        cognomeClm.setCellValueFactory(new PropertyValueFactory("cognome"));  
+        rubricaList.setItems(rubricaPointer.getContactList());
+        
+        //permetto la selezione multipla di contatti all'interno della tabella (CTRL + clickMouse)
+        rubricaList.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        
+        //rendo invisibile il tasto di reset della ricerca finchè il campo di ricerca è vuoto
+        resetResearch.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> (!researchField.getText().isEmpty()), researchField.textProperty()));
+        
+       
+        //gestisco L'evento di selezione singola e multipla dei contatti e lo associo alla tabella
+        EventHandler<MouseEvent> ClickHandler = event ->{
+            if(!event.isControlDown())
+                openContact(null); //apre lo studente
+
+        };
+        rubricaList.setOnMouseClicked(ClickHandler);
+        
+        
+        //gestisco l'evento di chiusura visualizzazione contatto tramite  tasto esc associandolo alla tabella
+        EventHandler<KeyEvent> escHandler = event -> { 
+            if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE) //controllo che il tasto pigiato sia quello di escape
+                contattoPane.getChildren().clear(); //chiudo la schermata di visualizzazione del contatto
+        };
+        rubricaList.setOnKeyPressed(escHandler);
+        
     }
     
     
