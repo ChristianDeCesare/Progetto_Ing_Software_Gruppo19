@@ -294,6 +294,7 @@ public class ContattoController implements Initializable {
             confMod();
     }
     
+    
     private void confAdd(){
       
         boolean flag = true;
@@ -357,17 +358,6 @@ public class ContattoController implements Initializable {
           
     }
 
-    /**
-     * @brief Elimina il contatto corrente.
-     *
-     *        Questo metodo viene invocato quando l'utente preme il bottone per eliminare uno o più contatti.
-     *        Il contatto o i contatti selezionati vengono rimossi dalla lista dei contatti gestita dall'applicazione.
-     *
-     * @param c l'evento che ha generato l'azione di eliminazione.
-     */
-    private void delete(ActionEvent c) {
-        // Da implementare
-    }
     
         /**
      * @brief Chiude l'interfaccia del controller
