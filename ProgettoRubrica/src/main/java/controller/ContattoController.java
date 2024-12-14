@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
@@ -164,6 +165,32 @@ public class ContattoController implements Initializable {
     * */
      @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //inizializzazione stringhe nei campi di testo
+        nameField.setText("");
+        surnameField.setText("");
+        number1Field.setText("");
+        number2Field.setText("");
+        number3Field.setText("");
+        email1Field.setText("");
+        email2Field.setText("");
+        email3Field.setText("");
+
+        //inizializzazione puntatore contatto e rubrica
+        contactPointer = null;
+        rubricaPointer = null;
+
+        //creazione binding tra pulsante conferma e campi di testo nome e cognome
+        confirmButton.disableProperty().bind(Bindings.createBooleanBinding(
+                () -> (nameField.getText().isEmpty() && surnameField.getText().isEmpty()), nameField.textProperty(), surnameField.textProperty()));
+
+        //gestione eventi da tastiera
+        contactPane.setOnKeyPressed(event -> {
+            if (event.getCode() == javafx.scene.input.KeyCode.ENTER) //gestione evento tasto ENTER
+                confirmButton.fire(); // Simula un click sul bottone confirm
+
+            else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)  //gestione evento tasto ESCAPE
+                exitButton.fire(); // Simula un click sul bottone exit
+            });
     
     }
     

@@ -22,7 +22,10 @@ public class ContattoTest {
     }
     
     @BeforeAll
-    public static void setUpClass() {
+    public void setUpClass() {
+        System.out.println("Inizializzazione contatto standard");
+        // Prima di ogni test, creiamo un nuovo contatto
+        contatto = new Contatto();
     }
     
     @AfterAll
