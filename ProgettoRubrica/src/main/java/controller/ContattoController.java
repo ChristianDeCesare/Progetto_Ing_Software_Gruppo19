@@ -16,7 +16,8 @@
 
 package controller;
 
-
+//Tutti i metodi sono documentati, (anche quelli privati) per fornire una breve
+//spiegazione del loro utilizzo
 import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
@@ -219,7 +220,7 @@ public class ContattoController implements Initializable {
      * 
      * @pre c, table ed r non devono essere null.
      * 
-     * @post il controller conterrà le informazioni di c.
+     * @post il controller conterrà le informazioni del contatto selezionato
      */
     public void setController(Contatto c, Rubrica r, TableView<Contatto> table) {
         
@@ -262,7 +263,7 @@ public class ContattoController implements Initializable {
      * @brief Gestisce l'interazione con i campi di testo
      *
      * Il metodo gestisce l'interazione con i campi di testo in modo che si renda
-     * possibile/impossibile la loro modifica
+     * impossibile la loro modifica
      * 
      * @param disable Permette di definire l'abilitazione o la disabilitazione dei campi:
      *                -true: disabilita
@@ -290,7 +291,7 @@ public class ContattoController implements Initializable {
      * Questo metodo permette il controllo di una stringa per accertarsi sia un numero di telefono
      * 
      * @param number La stringa da controllare
-     * @return Il risultato del controllo
+     * @return Il risultato del controllo, [@code false} in caso negativo, ovvero se la stringa non è un numero di telefono; {@code true} altrimenti
      */
     private boolean numberControl(String number){
         
@@ -317,7 +318,7 @@ public class ContattoController implements Initializable {
     /**
      * @brief Controllo nominativo inserito
      * 
-     * Questo metodo permette di controllare che le stringhe nome e cognome siano un nominativo valido
+     * Questo metodo permette di controllare che le stringhe nome e cognome siano un nominativo valido, ovvero contenenti solo lettere
      * 
      * @param name La stringa nome da controllare
      * @param surname La stringa cognome da controllare
@@ -351,7 +352,14 @@ public class ContattoController implements Initializable {
             confMod();
     }
     
-    
+    /*
+    * @ brief Gestisce l'aggiunta di un nuovo contatto alla rubrica.
+    * 
+    * Questo metodo verifica la validità dei dati inseriti dall'utente, 
+    * controllando i campi nominativi e recapiti. Se i controlli hanno esito positivo, 
+    * crea un nuovo oggetto `Contatto` e lo aggiunge alla rubrica.
+    * In caso di errore nei controlli o durante l'aggiunta, vengono mostrati messaggi di avviso.
+    */
     private void confAdd(){
       
         boolean flag = true;
@@ -415,23 +423,21 @@ public class ContattoController implements Initializable {
           
     }
 
-    private void confMod(){
-        
-         
-        if (contactPointer == null) { //controllo che il puntatore al contatto non sia null
+    private void confMod(){  
+        //controllo che il puntatore al contatto non sia null   
+        if (contactPointer == null) { 
             System.out.println("Nessun contatto selezionato.");
             return;
         }   
-
-
-        if (!nominativeControl(nameField.getText(), surnameField.getText())) { //controllo nominativi
+        
+        //controllo nominativi
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) { 
                 Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
                 return;
             }
-
-                
-    
-        if (!(numberControl(number1Field.getText()) //controllo recapiti
+        
+        //controllo recapiti
+        if (!(numberControl(number1Field.getText()) 
             && numberControl(number2Field.getText())
             && numberControl(number3Field.getText())
             && mailControl(email1Field.getText())
@@ -441,8 +447,6 @@ public class ContattoController implements Initializable {
             Avviso.errore("Errore", "Errore Recapiti","Recapiti modificati erroneamente");
             return;
         }
-
-
             
         //creo contatto temporaneo per controllo omonimia
         Contatto temp = new Contatto();
@@ -459,7 +463,6 @@ public class ContattoController implements Initializable {
         //modifico contatto e riordino rubrica
         contactPointer.setNome(nameField.getText());
         contactPointer.setCognome(surnameField.getText());
-
         contactPointer.setEmail1(email1Field.getText());
         contactPointer.setEmail2(email2Field.getText());
         contactPointer.setEmail3(email3Field.getText());
@@ -468,8 +471,7 @@ public class ContattoController implements Initializable {
         contactPointer.setNumero3(number3Field.getText());
 
         Collections.sort(rubricaPointer.getContactList());
-
-
+        //disabilito tutti i campi una volta assegnati i loro valori
         disableModify(true);
 
 
