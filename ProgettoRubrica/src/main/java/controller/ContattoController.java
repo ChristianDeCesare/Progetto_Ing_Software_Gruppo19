@@ -25,6 +25,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -278,6 +279,57 @@ public class ContattoController implements Initializable {
         this.confirmButton.setVisible(!disable);
 
     }
+    
+    /**
+     * @brief Controllo numero di telefono
+     * 
+     * Questo metodo permette il controllo di una stringa per accertarsi sia un numero di telefono
+     * 
+     * @param number La stringa da controllare
+     * @return Il risultato del controllo
+     */
+    private boolean numberControl(String number){
+        
+        
+          if(number.isEmpty()){ //controllo che la stringa sia vuota
+            return true;
+        }
+        
+        
+        if(number.length() != 10) //controllo della lunghezza della stringa
+            return false;
+        
+        
+        for(int i = 0 ; i < 10 ; i++){ //controllo che i caratteri della stringa siano numeri
+            if(!Character.isDigit(number.charAt(i)))
+                return false;
+        }
+        
+        return true;
+    
+    
+    }
+    
+    /**
+     * @brief Controllo nominativo inserito
+     * 
+     * Questo metodo permette di controllare che le stringhe nome e cognome siano un nominativo valido
+     * 
+     * @param name La stringa nome da controllare
+     * @param surname La stringa cognome da controllare
+     * 
+     * @pre Almeno una tra le stringhe passate non deve essere vuota
+     * @pre Le stringhe non devono essere null
+     * 
+     * @post Ritorno risultato del controllo
+     * 
+     * @return Il risultato del controllo
+     */
+    private boolean nominativeControl(String name, String surname){
+        if (!name.isEmpty() && !Character.isLetter(name.charAt(0))) //controllo primo carattere del nome
+            return false;
+        return !( !surname.isEmpty() && !Character.isLetter(surname.charAt(0)) ); //controllo primo carattere del cognome
+    }
 
     /**
      * @brief Conferma le modifiche al contatto.
@@ -358,6 +410,63 @@ public class ContattoController implements Initializable {
           
     }
 
+    private void confMod(){
+        
+         
+        if (contactPointer == null) { //controllo che il puntatore al contatto non sia null
+            System.out.println("Nessun contatto selezionato.");
+            return;
+        }    
+ 
+      
+      boolean flag = true;
+
+
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) { //controllo nominativi
+                Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
+                flag = false;
+            }
+
+                
+    
+            if (!(numberControl(number1Field.getText()) //controllo recapiti
+                    && numberControl(number2Field.getText())
+                    && numberControl(number3Field.getText())
+                    && mailControl(email1Field.getText())
+                    && mailControl(email2Field.getText())
+                    && mailControl(email3Field.getText()))) 
+    
+                {
+    
+                    Avviso.errore("Errore", "Errore Recapiti","Recapiti modificati erroneamente");
+                    flag = false;
+    
+    }
+
+
+            
+                if (flag) {//controllo flag
+                        //modifico contatto e riordino rubrica
+                        contactPointer.setNome(nameField.getText());
+                        contactPointer.setCognome(surnameField.getText());
+                        contactPointer.setEmail1(email1Field.getText());
+                        contactPointer.setEmail2(email2Field.getText());
+                        contactPointer.setEmail3(email3Field.getText());
+                        contactPointer.setNumero1(number1Field.getText());
+                        contactPointer.setNumero2(number2Field.getText());
+                        contactPointer.setNumero3(number3Field.getText());
+                        
+                        Collections.sort(rubricaPointer.getContactList());
+                        
+
+                        disableModify(true);
+                        
+                        
+                       tablePointer.refresh();    
+    
+                    }
+
+    }
     
         /**
      * @brief Chiude l'interfaccia del controller
