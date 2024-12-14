@@ -138,7 +138,7 @@ public class RubricaController implements Initializable {
     * @param resources Le risorse utilizzate per la scena (può essere null se non presenti).
     * 
     * */
-     @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
     
         //rendo invisibile il pannello del contatto
@@ -281,7 +281,7 @@ public class RubricaController implements Initializable {
     /**
      * @brief Apre i dettagli di un contatto selezionato.
      * 
-     * @param e evento che attiva l'apertura del contatto
+     * @param event evento che attiva l'apertura del contatto
      */
     private void openContact(javafx.event.ActionEvent event) throws IOException {
     
@@ -309,7 +309,7 @@ public class RubricaController implements Initializable {
     /**
      * @brief Esporta i contatti della Rubrica in un file.
      * 
-     * @param e evento che attiva l'esportazione
+     * @param event evento che attiva l'esportazione
      */
     @FXML
     private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
@@ -347,7 +347,7 @@ public class RubricaController implements Initializable {
     /**
      * @brief Importa contatti nella Rubrica da un file.
      * 
-     * @param e evento che attiva l'importazione
+     * @param event evento che attiva l'importazione
      */
     @FXML
     private void importRubrica(javafx.event.ActionEvent event) throws IOException {
