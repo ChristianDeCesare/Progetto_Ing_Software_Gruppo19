@@ -167,8 +167,8 @@ public class Rubrica {
      * @post La rubrica contenuta nel file avente come nome nomefile viene caricata come rubrica nell'applicazione
      * 
      * @return Riferimento alla nuova rubrica importata
-     * @throws java.io.FileNotFoundException Eccezione per la gestione di file non trovato
-     * @throws java.io.IOException
+     * @throws FileNotFoundException Eccezione per la gestione di file non trovato
+     * @throws IOException
      */
     public Rubrica importaRubrica(String nomefile) throws FileNotFoundException, IOException{
     

@@ -106,7 +106,7 @@ public class RubricaController implements Initializable {
     private javafx.scene.control.Button resetResearch;
     
     /**
-     * Campo di testa per la ricerca dei contatti tramite sottostringa nella rubrica.
+     * Campo di testo per la ricerca dei contatti tramite sottostringa all'interno della rubrica.
      */
     @FXML
     private javafx.scene.control.TextField researchField;
@@ -131,7 +131,7 @@ public class RubricaController implements Initializable {
     * @brief Inizializza il controller al caricamento della scena.
     * 
     *Questo metodo viene chiamato automaticamente dal framework JavaFX 
-    *        quando la scena associata a questo controller viene caricata.
+    *quando la scena associata a questo controller viene caricata.
     * 
     * @param location La posizione del file FXML associato al controller (può essere null se non fornito).
     * @param resources Le risorse utilizzate per la scena (può essere null se non presenti).
@@ -182,12 +182,16 @@ public class RubricaController implements Initializable {
         
     }
 
+    
+    
+    
     /**
-     * @brief Metodo gestione aggiunta contatto
+     * @brief Metodo per la gestione dell'aggiunta di un nuovo contatto all'interno della rubrica.
      * 
-     * Questo metodo permette l'apertura di un pop-up per le operazioni di creazione e inserimento di un nuovo contatto nella tabella 
+     * Questo metodo permette l'apertura di un pop-up per le operazioni di 
+     * creazione e inserimento di un nuovo contatto nella rubrica 
      * 
-     * @param event L'evento che ha generato l'azione di aggiunta
+     * @param event L'evento che ha generato l'azione di aggiunta del contatto
      * 
      * @throws IOException Eccezione per la gestione di errori durante l'apertura della finestra di aggiunta del contatto
      */
