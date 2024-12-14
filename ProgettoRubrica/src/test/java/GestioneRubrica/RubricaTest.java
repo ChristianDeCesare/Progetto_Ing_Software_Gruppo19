@@ -37,6 +37,9 @@ public class RubricaTest {
     
     @BeforeEach
     public void setUp() {
+        
+        // Prima di ogni test, creiamo una rubrica e ci aggiungiamo dentro 2 contatti
+        
         rubrica= new Rubrica();
         contatto1 = new Contatto();
         contatto1.setNome("Lorenzo");
@@ -56,41 +59,48 @@ public class RubricaTest {
    
 
     /**
-     * Test of aggiungiContatto method, of class Rubrica.
+     * Test del metodo aggiungiContatto, della classe Rubrica.
      */
     @Test
     public void testAggiungiContatto() {
+        
         System.out.println("aggiungiContatto Test");
         Rubrica rubrica1 = new Rubrica();
         
         rubrica1.aggiungiContatto(contatto1);
-        assertTrue(rubrica1.getContactList().contains(contatto1));
+         
+        //verifica se la rubrica contiene il contatto inserito in precedenza
+        assertTrue(rubrica1.getContactList().contains(contatto1));  
             
     }
 
     /**
-     * Test of rimuoviContatto method, of class Rubrica.
+     * Test del metodo rimuoviContatto, della classe Rubrica.
      */
     @Test
     public void testRimuoviContatto() {
+        
         System.out.println("aggiungiContatto Test");
         Rubrica rubrica1 = new Rubrica();
         
+        // crea una lista che conterrà il contatto o i contatti che dovranno essere eliminati
         ObservableList<Contatto> list;
-        list = FXCollections.observableArrayList();
+        list = FXCollections.observableArrayList();  
         list.add(contatto1);
         
         rubrica1.aggiungiContatto(contatto1);
         rubrica1.rimuoviContatto(list);
         
-        assertFalse(rubrica1.getContactList().contains(contatto1));
+        // verifica se il contatto eliminato precedentemente sia ancora presente all'interno della rubrica
+        assertFalse(rubrica1.getContactList().contains(contatto1));  
     }
 
     /**
-     * Test of getContactList method, of class Rubrica.
+     * Test del metodo getContactList, della classe Rubrica.
      */
     @Test
     public void testGetContactList() {
+        
         Rubrica rubrica1 = new Rubrica();
         rubrica1.aggiungiContatto(contatto1);
         rubrica1.aggiungiContatto(contatto2);
@@ -99,13 +109,14 @@ public class RubricaTest {
     }
 
     /**
-     * Test of ricercaContatti method, of class Rubrica.
+     * Test del metodo ricercaContatti, della classe Rubrica.
      */
     @Test
     void testRicercaContattiConNomeEsatto() {
+       
         System.out.println("RicercaContatti Test");
 
-        // Creazione di una rubrica con dati di esempio
+        // Creazione di una nuova rubrica con dati di esempio
         Rubrica rubricaTest1 = new Rubrica();
 
         Contatto contatto1 = new Contatto();
@@ -118,6 +129,8 @@ public class RubricaTest {
         contatto2.setCognome("Rossi");
         rubricaTest1.aggiungiContatto(contatto2);
         
+        
+        // Stringa che si vuole ricercare all'interno della rubrica
         String s="Lor";
         
         Rubrica temp = new Rubrica();
@@ -125,21 +138,26 @@ public class RubricaTest {
         temp = rubricaTest1.ricercaContatti(s);
         
         assertNotNull(temp);
-        assertEquals(1, temp.getContactList().size()); // Deve esserci solo 1 contatto
+        // Verifica che all'interno della rubrica temporanea ci sia solo 1 contatto
+        assertEquals(1, temp.getContactList().size()); 
+        // Verifica che il nome del contatto contenuto all'interno della lista temporanea sia quello atteso
         assertTrue(temp.getContactList().stream().anyMatch(c -> c.getNome().equals("Lorenzo")));
     
     }
 
 
     /**
-     * Test of importaRubrica method, of class Rubrica.
+     * Test del metodo importaRubrica, della classe Rubrica.
      */
     @Test
 public void testImportaRubrica() throws Exception {
+    
     System.out.println("importaRubrica Test");
 
     // Creazione di un file di test temporaneo
     String nomefile = "rubrica_test.csv";
+    
+    // All'interno del file temporaneo vengono inseriti 2 contatti
     try (PrintWriter writer = new PrintWriter(nomefile)) {
         writer.println("RUBRICA");
         writer.println("Cognome;Nome;Numero1;Numero2;Numero3;Email1;Email2;Email3");
@@ -156,20 +174,19 @@ public void testImportaRubrica() throws Exception {
     // Verifica dei risultati
     assertNotNull(result);
     assertEquals(2, result.getContactList().size());
-
-    
-
-    // Eliminazione del file di test
+ 
+    // Eliminazione del file di test temporaneo
     Files.deleteIfExists(Paths.get(nomefile));
 }
 
 
     /**
-     * Test of esportaRubrica method, of class Rubrica.
+     * Test del metodo esportaRubrica, della classe Rubrica.
      */
     @Test
     public void testEsportaRubrica() throws Exception {
-System.out.println("esportaRubrica Test");
+    
+    System.out.println("esportaRubrica Test");
 
     // Nome del file temporaneo
     String nomefile = "rubrica_export_test.csv";
@@ -180,10 +197,12 @@ System.out.println("esportaRubrica Test");
     contatto1.setEmail1("");
     contatto1.setEmail2("");
     contatto1.setEmail3("");
+    
     contatto2.setNumero2("");
     contatto2.setNumero3("");
     contatto2.setEmail2("");
     contatto2.setEmail3("");
+    
     instance.aggiungiContatto(contatto1);
     instance.aggiungiContatto(contatto2);
     

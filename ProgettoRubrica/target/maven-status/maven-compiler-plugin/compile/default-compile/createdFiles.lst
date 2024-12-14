@@ -1,6 +1,6 @@
-controller\RubricaController.class
-controller\ContattoController.class
-gestioneRubrica\Rubrica.class
-com\mycompany\progettorubrica\App.class
-gestioneRubrica\Avviso.class
-gestioneRubrica\Contatto.class
+gestioneRubrica/Avviso.class
+controller/ContattoController.class
+gestioneRubrica/Rubrica.class
+controller/RubricaController.class
+com/mycompany/progettorubrica/App.class
+gestioneRubrica/Contatto.class
