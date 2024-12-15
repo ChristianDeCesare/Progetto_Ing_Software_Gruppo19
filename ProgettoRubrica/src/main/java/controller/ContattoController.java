@@ -21,10 +21,6 @@ package controller;
 import gestioneRubrica.Avviso;
 import gestioneRubrica.Contatto;
 import gestioneRubrica.Rubrica;
-import java.awt.Button;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -352,8 +348,8 @@ public class ContattoController implements Initializable {
             confMod();
     }
     
-    /*
-    * @ brief Gestisce l'aggiunta di un nuovo contatto alla rubrica.
+   /*
+    *  @brief Gestisce l'aggiunta di un nuovo contatto alla rubrica.
     * 
     * Questo metodo verifica la validità dei dati inseriti dall'utente, 
     * controllando i campi nominativi e recapiti. Se i controlli hanno esito positivo, 

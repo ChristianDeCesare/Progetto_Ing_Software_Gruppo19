@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package GestioneRubrica;
+package gestioneRubricaTest;
 
 import gestioneRubrica.Rubrica;
 import gestioneRubrica.Contatto;
@@ -24,7 +24,7 @@ public class RubricaTest {
     private Rubrica rubrica;
     private Contatto contatto1;
     private Contatto contatto2;
-    private Contatto contatto3;
+    
     
     public RubricaTest() {
     }
